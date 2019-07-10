@@ -10,7 +10,11 @@ import javax.persistence.TemporalType;
 
 import lombok.Data;
 
-
+/**
+ * 
+ * @author hsneider.salgado
+ *
+ */
 @Data
 public class Ticket {
 	@Id

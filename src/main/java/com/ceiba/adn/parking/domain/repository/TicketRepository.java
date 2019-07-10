@@ -6,7 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.ceiba.adn.parking.domain.entity.Ticket;
-
+/**
+ * 
+ * @author hsneider.salgado
+ *
+ */
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Integer>{
 	public Ticket save(Ticket ticket);

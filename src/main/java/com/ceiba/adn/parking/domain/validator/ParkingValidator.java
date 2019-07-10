@@ -5,6 +5,12 @@ import java.time.LocalDateTime;
 
 import co.com.ceiba.adn.parking.domain.exception.ParkingException;
 
+
+/**
+ * 
+ * @author hsneider.salgado
+ *
+ */
 public class ParkingValidator {
 	
 	private static final String RESTRICTED_PLATE_FILTER = "A";

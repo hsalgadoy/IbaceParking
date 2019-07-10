@@ -3,7 +3,11 @@ package com.ceiba.adn.parking.domain.validator;
 
 import co.com.ceiba.adn.parking.domain.exception.ParkingException;
 import lombok.Data;
-
+/**
+ * 
+ * @author hsneider.salgado
+ *
+ */
 @Data
 public final class ArgumentValidator {
 	

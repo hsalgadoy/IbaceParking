@@ -5,7 +5,11 @@ import com.ceiba.adn.parking.domain.validator.ArgumentValidator;
 import lombok.Data;
 
 import javax.persistence.Id;
-
+/**
+ * 
+ * @author hsneider.salgado
+ *
+ */
 @Data
 public class Vehicle {
 	@Id

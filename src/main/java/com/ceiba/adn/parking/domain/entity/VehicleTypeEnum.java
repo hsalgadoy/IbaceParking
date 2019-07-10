@@ -4,7 +4,11 @@ package com.ceiba.adn.parking.domain.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-
+/**
+ * 
+ * @author hsneider.salgado
+ *
+ */
 public enum VehicleTypeEnum {
 	
 	MOTORBYKE(500F,4000F, 10),
