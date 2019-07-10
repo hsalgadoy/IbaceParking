@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component;
 
 import com.ceiba.adn.parking.domain.validator.ParkingValidator;
 
-import lombok.Data;
-
 /**
  * 
  * @author hsneider.salgado
