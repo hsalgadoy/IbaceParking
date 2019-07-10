@@ -1,9 +1,8 @@
-package com.ceiba.adn.parking.domain.entity;
+package co.com.ceiba.adn.parking.domain.model;
 
 import javax.persistence.Id;
 
-import com.ceiba.adn.parking.domain.validator.ArgumentValidator;
-
+import co.com.ceiba.adn.parking.domain.validator.ArgumentValidator;
 import lombok.Data;
 
 /**
@@ -28,5 +27,7 @@ public class Vehicle {
 		this.displacement = displacement;
 		this.vehicleType = vehicleType;
 	}
+
+	
 
 }

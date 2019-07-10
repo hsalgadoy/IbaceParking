@@ -1,4 +1,4 @@
-package com.ceiba.adn.parking.domain.validator;
+package co.com.ceiba.adn.parking.domain.validator;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;

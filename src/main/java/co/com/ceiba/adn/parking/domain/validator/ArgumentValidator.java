@@ -1,4 +1,4 @@
-package com.ceiba.adn.parking.domain.validator;
+package co.com.ceiba.adn.parking.domain.validator;
 
 import co.com.ceiba.adn.parking.domain.exception.ParkingException;
 import lombok.Data;

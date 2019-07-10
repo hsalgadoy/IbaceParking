@@ -1,4 +1,4 @@
-package com.ceiba.adn.parking.domain.entity;
+package co.com.ceiba.adn.parking.domain.model;
 
 
 import lombok.Getter;

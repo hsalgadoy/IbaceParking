@@ -1,4 +1,4 @@
-package com.ceiba.adn.parking.domain.entity;
+package co.com.ceiba.adn.parking.infrastructure.adapter.entity;
 
 import java.time.LocalDateTime;
 
@@ -8,15 +8,18 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import lombok.Data;
+import co.com.ceiba.adn.parking.domain.model.Vehicle;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 
  * @author hsneider.salgado
  *
  */
-@Data
-public class Ticket {
+@Setter
+@Getter
+public class TicketEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -26,19 +29,5 @@ public class Ticket {
 	private LocalDateTime departureDate;
 	private Vehicle vehicle;
 	private boolean payment = false;
-	
-	public Ticket() {
-		
-	}
-
-	public Ticket(int id, LocalDateTime entranceDate, LocalDateTime departureDate, Vehicle vehicle, boolean payment) {
-		this.id = id;
-		this.entranceDate = entranceDate;
-		this.departureDate = departureDate;
-		this.vehicle = vehicle;
-		this.payment = payment;
-	}
-
-	
 
 }

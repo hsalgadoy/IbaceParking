@@ -1,4 +1,4 @@
-package com.ceiba.adn.parking.domain.entity;
+package co.com.ceiba.adn.parking.domain.model;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -6,7 +6,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.ceiba.adn.parking.domain.validator.ParkingValidator;
+import co.com.ceiba.adn.parking.domain.validator.ParkingValidator;
+import co.com.ceiba.adn.parking.infrastructure.adapter.entity.TicketEntity;
 
 /**
  * 
@@ -19,20 +20,20 @@ public class Parking {
 	private static final String MAX_CAPACITY_MESSAGE = "Capacidad maxima para este tipo de vehiculo";
 	private static final String RESTRICTION_MESSAGE = "El vehiculo tiene restricion de acceso el dia de hoy";
 
-	private List<Ticket> tickets;
+	private List<TicketEntity> tickets;
 
 	
-	public Parking(List<Ticket> tickets) {
+	public Parking(List<TicketEntity> tickets) {
 		this.tickets = tickets;
 	}
 
-	public Ticket vehicleCheckIn(Vehicle vehicle, LocalDateTime entryDate) {
+	public TicketEntity vehicleCheckIn(Vehicle vehicle, LocalDateTime entryDate) {
 
 		ParkingValidator.capacityValidation(countVehiclesByType(vehicle.getVehicleType()),
 				vehicle.getVehicleType().getMaxQuantity(), MAX_CAPACITY_MESSAGE);
 		ParkingValidator.checkInByLicensePlateValidation(vehicle.getLicensePlate(), entryDate, RESTRICTION_MESSAGE);
 
-		Ticket ticket = new Ticket();
+		TicketEntity ticket = new TicketEntity();
 		ticket.setEntranceDate(entryDate);
 		ticket.setVehicle(vehicle);
 
@@ -42,7 +43,7 @@ public class Parking {
 
 	}
 
-	public float calculatePrice(Ticket ticket) {
+	public float calculatePrice(TicketEntity ticket) {
 
 		LocalDateTime tempDateTime = LocalDateTime.from(ticket.getEntranceDate());
 		long days = tempDateTime.until(ticket.getDepartureDate(), ChronoUnit.DAYS);
