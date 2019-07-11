@@ -5,10 +5,9 @@ import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import co.com.ceiba.adn.parking.domain.model.Parking;
 import co.com.ceiba.adn.parking.domain.model.Vehicle;
+import co.com.ceiba.adn.parking.domain.repository.TicketRepository;
 import co.com.ceiba.adn.parking.infrastructure.adapter.entity.TicketEntity;
-import co.com.ceiba.adn.parking.infrastructure.adapter.repository.jpa.TicketRepositoryJPA;
 
 /**
  * 
@@ -19,10 +18,8 @@ import co.com.ceiba.adn.parking.infrastructure.adapter.repository.jpa.TicketRepo
 public class ParkingService {
 
 	@Autowired
-	private TicketRepositoryJPA ticketRepository;
+	private TicketRepository ticketRepository;
 	
-	@Autowired
-	private Parking parking;
 	
 	public TicketEntity vehicleRegistration(Vehicle vehicle, LocalDateTime entryDate) {	
 		return ticketRepository.save(parking.vehicleCheckIn(vehicle, entryDate));

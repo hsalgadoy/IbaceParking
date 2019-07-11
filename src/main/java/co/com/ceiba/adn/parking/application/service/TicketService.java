@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.com.ceiba.adn.parking.infrastructure.adapter.entity.TicketEntity;
-import co.com.ceiba.adn.parking.infrastructure.adapter.repository.jpa.TicketRepositoryJPA;
+import co.com.ceiba.adn.parking.infrastructure.adapter.repository.jpa.ParkingTicketRepositoryJPA;
 import lombok.Data;
 
 /**
@@ -19,7 +19,7 @@ import lombok.Data;
 public class TicketService {
 
 	@Autowired
-	private TicketRepositoryJPA ticketRepository;
+	private ParkingTicketRepositoryJPA ticketRepository;
 	/**
 	 * Access to save ticket
 	 * @param ticket objet ticket to be saved

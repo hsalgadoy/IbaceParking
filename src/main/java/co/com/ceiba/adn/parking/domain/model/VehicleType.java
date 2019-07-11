@@ -5,8 +5,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.Getter;
@@ -19,15 +17,17 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Vehicle {
-
-
-	private String licensePlate;
+public class VehicleType {
+	private int idVehicleType;
 	
-	private  double displacement;
+	private double hourValue;
 	
-	private VehicleType vehicleType;
+	private double dayValue;
 	
-	private List<ParkingTicket> tickets;
+	private int parkingSpace;
+	
+	private int spaceAviable;
+	
+	private List<Vehicle> vehicles;
+	
 }
- 

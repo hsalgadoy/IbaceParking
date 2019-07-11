@@ -4,14 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.com.ceiba.adn.parking.infrastructure.adapter.repository.jpa.TicketRepositoryJPA;
+import co.com.ceiba.adn.parking.infrastructure.adapter.repository.jpa.ParkingTicketRepositoryJPA;
 
 @Repository
 @Transactional
 public class TicketImplementation {
 	
 	@Autowired
-	private TicketRepositoryJPA ticketRepositoryJPA;
+	private ParkingTicketRepositoryJPA ticketRepositoryJPA;
 	
 	
 
