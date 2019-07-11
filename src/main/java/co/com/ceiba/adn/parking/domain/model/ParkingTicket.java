@@ -25,14 +25,13 @@ public class ParkingTicket {
 	
 	private long TicketNumber;
 	
-	
 	private Vehicle vehicle;
 	
 	private LocalDateTime inTimeDate;
 	
 	private LocalDateTime outTimeDate;
 	
-	private boolean DisplacementlCost;
+	private boolean DisplacementCost;
 	
 	private double grossTotal;
 	

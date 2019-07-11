@@ -9,12 +9,10 @@ import co.com.ceiba.adn.parking.infrastructure.adapter.entity.VehicleEntity;
 public final class VehicleMapper {
 
 	public static Vehicle toDomain(VehicleEntity entity) {
-		return new Vehicle();
+		
 	}
 
 	public static VehicleEntity toEntity(Vehicle domain) {
-		VehicleEntity entity = new VehicleEntity();
 		
-		return entity;
 	}
 }

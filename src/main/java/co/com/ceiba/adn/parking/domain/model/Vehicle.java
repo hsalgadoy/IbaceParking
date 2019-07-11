@@ -26,8 +26,7 @@ public class Vehicle {
 	
 	private  double displacement;
 	
-	private VehicleType vehicleType;
+	private int vehicleType;
 	
-	private List<ParkingTicket> tickets;
 }
  

@@ -30,7 +30,6 @@ public class VehicleEntity {
 	@JoinColumn(name="ID_VEHICLE_TYPE", nullable=false)
 	private VehicleTypeEntity vehicleType;
 	
-	@OneToMany(mappedBy="vehicle")
-	private List<ParkingTicketEntity> tickets;
+	
 }
  
