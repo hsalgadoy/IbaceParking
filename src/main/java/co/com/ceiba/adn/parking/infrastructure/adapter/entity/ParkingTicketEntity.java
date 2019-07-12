@@ -37,7 +37,7 @@ public class ParkingTicketEntity {
 	private LocalDateTime outTimeDate;
 	
 	@Column(name = "DISPLACEMENT_COST")
-	private boolean DisplacementlCost;
+	private double DisplacementlCost;
 	
 	@Column(name = "GROSS_TOTAL")
 	private double grossTotal;

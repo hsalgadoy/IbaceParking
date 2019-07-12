@@ -31,7 +31,7 @@ public class ParkingTicket {
 	
 	private LocalDateTime outTimeDate;
 	
-	private boolean DisplacementCost;
+	private double DisplacementCost;
 	
 	private double grossTotal;
 	
