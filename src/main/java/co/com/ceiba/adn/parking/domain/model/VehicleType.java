@@ -1,7 +1,5 @@
 package co.com.ceiba.adn.parking.domain.model;
 
-import java.util.List;
-
 import lombok.Getter;
 import lombok.Setter;
 /**
@@ -25,6 +23,5 @@ public class VehicleType {
 	
 	private double DisplacementCost;
 	
-	private List<Vehicle> vehicles;
 	
 }
