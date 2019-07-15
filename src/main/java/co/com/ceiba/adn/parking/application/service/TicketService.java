@@ -1,5 +1,7 @@
 package co.com.ceiba.adn.parking.application.service;
 
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.stereotype.Service;
 import co.com.ceiba.adn.parking.domain.model.ParkingTicket;
 import co.com.ceiba.adn.parking.domain.model.Vehicle;
 import co.com.ceiba.adn.parking.domain.repository.TicketRepository;
+import co.com.ceiba.adn.parking.domain.repository.VehicleRepository;
+import co.com.ceiba.adn.parking.domain.repository.VehicleTypeRepository;
 import lombok.Data;
 
 /**
@@ -21,6 +25,21 @@ public class TicketService {
 
 	@Autowired
 	private TicketRepository ticketRepository;
+	@Autowired
+	private VehicleRepository vehicleRepository;
+	@Autowired
+	private VehicleTypeRepository typeRepository;
+	
+	
+	public void registryIn(Vehicle vehicle) {
+		LocalDateTime inDateTime = LocalDateTime.now();
+		ParkingTicket ticket = new ParkingTicket();
+		ticket.setInTimeDate(inDateTime);
+		ticket.setVehicle(vehicle);
+		this.saveTicket(ticket);
+	}
+	
+	
 	/**
 	 * Access to save ticket
 	 * @param ticket object ticket to be saved
@@ -39,5 +58,12 @@ public class TicketService {
 	
 	public  ParkingTicket findByVehicle(Vehicle vehicle) {
 		return ticketRepository.findByVehicle(vehicle);
+	}
+	public TicketService(TicketRepository ticketRepository, VehicleRepository vehicleRepository,
+			VehicleTypeRepository typeRepository) {
+		super();
+		this.ticketRepository = ticketRepository;
+		this.vehicleRepository = vehicleRepository;
+		this.typeRepository = typeRepository;
 	}
 }

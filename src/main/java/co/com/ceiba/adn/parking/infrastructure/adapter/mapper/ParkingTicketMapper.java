@@ -10,7 +10,6 @@ public final class ParkingTicketMapper {
 
 	public static ParkingTicket toDomain(ParkingTicketEntity entity) {
 		ParkingTicket parkingTicket = new ParkingTicket();
-		parkingTicket.setDisplacementCost((entity.getDisplacementlCost()));
 		parkingTicket.setInTimeDate(entity.getInTimeDate());
 		parkingTicket.setOutTimeDate(entity.getOutTimeDate());
 		parkingTicket.setGrossTotal(entity.getGrossTotal());
@@ -25,7 +24,6 @@ public final class ParkingTicketMapper {
 		parkingTicketEntity.setTicketNumber(domain.getTicketNumber());
 		parkingTicketEntity.setInTimeDate(domain.getInTimeDate());
 		parkingTicketEntity.setOutTimeDate(domain.getOutTimeDate());
-		parkingTicketEntity.setDisplacementlCost(domain.getDisplacementCost());
 		parkingTicketEntity.setVehicle(VehicleMapper.toEntity(domain.getVehicle()));
 		parkingTicketEntity.setGrossTotal(domain.getGrossTotal());
 		

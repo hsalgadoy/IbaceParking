@@ -2,9 +2,6 @@ package co.com.ceiba.adn.parking.domain.model;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 import lombok.Getter;
 import lombok.Setter;
 /**
@@ -12,10 +9,9 @@ import lombok.Setter;
  * @author hsneider.salgado
  *
  */
-@Entity
+
 @Getter
 @Setter
-@Table(name="PARKING_TICKET")
 public class ParkingTicket {
 	
 	private long TicketNumber;
@@ -26,7 +22,7 @@ public class ParkingTicket {
 	
 	private LocalDateTime outTimeDate;
 	
-	private double DisplacementCost;
+	
 	
 	private double grossTotal;
 	

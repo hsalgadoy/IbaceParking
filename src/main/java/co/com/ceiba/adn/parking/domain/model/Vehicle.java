@@ -1,7 +1,5 @@
 package co.com.ceiba.adn.parking.domain.model;
 
-import javax.persistence.Entity;
-
 import lombok.Getter;
 import lombok.Setter;
 /**
@@ -9,7 +7,7 @@ import lombok.Setter;
  * @author hsneider.salgado
  *
  */
-@Entity
+
 @Getter
 @Setter
 public class Vehicle {
@@ -20,6 +18,8 @@ public class Vehicle {
 	private  double displacement;
 	
 	private int vehicleType;
+	
+	
 	
 	
 	
