@@ -117,7 +117,7 @@ public class Parking {
 			Vehicle vehicle) {
 		long cost = 0;
 
-		long serviceTime = TimeUnit.SECONDS.toHours(outDateTime.getSecond() - inDateTime.getSecond());
+		long serviceTime = TimeUnit.SECONDS.toHours(((long)outDateTime.getSecond() - (long)inDateTime.getSecond()));
 
 		while (serviceTime >= 24) {
 			cost += type.getDayValue();
