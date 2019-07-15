@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import co.com.ceiba.adn.parking.domain.model.ParkingTicket;
 import co.com.ceiba.adn.parking.domain.model.Vehicle;
 import co.com.ceiba.adn.parking.domain.repository.TicketRepository;
-import co.com.ceiba.adn.parking.infrastructure.adapter.entity.ParkingTicketEntity;
 import lombok.Data;
 
 /**
