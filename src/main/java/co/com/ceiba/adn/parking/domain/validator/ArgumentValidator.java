@@ -11,6 +11,10 @@ import lombok.Data;
 @Data
 public final class ArgumentValidator {
 
+	private ArgumentValidator() {
+		
+	}
+	
 	public static void required(Object object, String warningMesage) {
 		if (object == null)
 			throw new ParkingException(warningMesage);

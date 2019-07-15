@@ -102,7 +102,8 @@ public class Parking {
 
 	public ParkingTicket validateVehicelOut(Vehicle vehicle, ParkingTicket ticketParking) {
 		ParkingTicket ticket = new ParkingTicket();
-		LocalDateTime inDate, outDate;
+		LocalDateTime inDate;
+		LocalDateTime outDate;
 		outDate = LocalDateTime.now();
 		inDate = ticketParking.getInTimeDate();
 		ticket.setOutTimeDate(outDate);
@@ -121,9 +122,8 @@ public class Parking {
 		while (serviceTime >= 24) {
 			cost += type.getDayValue();
 			serviceTime -= 24;
-			{
+			
 
-			}
 		}
 		cost += (serviceTime >= 9 ? type.getHourValue() : type.getHourValue() * serviceTime)
 				+ ((type.getIdVehicleType() == TYPE_MOTORBYKE && vehicle.getDisplacement() >= EXTRA_RATE_CYLINDER)

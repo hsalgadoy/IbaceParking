@@ -9,6 +9,10 @@ import co.com.ceiba.adn.parking.infrastructure.adapter.entity.VehicleTypeEntity;
 @Component
 public final class VehicleMapper {
 
+	private VehicleMapper() {
+		
+	}
+	
 	public static Vehicle toDomain(VehicleEntity entity) {
 		Vehicle vehicle = new Vehicle();
 		
