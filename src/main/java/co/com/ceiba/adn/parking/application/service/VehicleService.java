@@ -22,18 +22,28 @@ public class VehicleService {
 	private VehicleRepository vehicleRepository ;
 	
 	/**
-	 * return the list of all vehicles into parkin
+	 * return the list of all vehicles into parking
 	 * @return
 	 */
 	public List<Vehicle> findAllVehicles() {
 		return vehicleRepository.findAll();
 	}
+	
 	/**
-	 * return the vehicle sended to save as a saved
+	 * return the vehicle sent to save as a saved
 	 * @param vehicle
 	 */
 	public void saveVehicle(Vehicle vehicle) {
 		vehicleRepository.save(vehicle);
+	}
+	
+	/**
+	 * Obtain the vehicle searching by the licensePlate
+	 * @param licensePlate the license plate as a string
+	 * @return vehicle 
+	 */
+	public Vehicle ObtainVehicleByLicensePlate(String licensePlate) {
+		return vehicleRepository.findVehicleByLicensePlate(licensePlate);
 	}
 
 }

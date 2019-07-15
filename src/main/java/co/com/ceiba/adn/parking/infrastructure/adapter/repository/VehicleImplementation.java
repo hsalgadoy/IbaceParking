@@ -29,4 +29,10 @@ public class VehicleImplementation implements VehicleRepository{
 		return new ArrayList<Vehicle>();
 	}
 
+	@Override
+	public Vehicle findVehicleByLicensePlate(String licensePlate) {
+		
+		return null;
+	}
+
 }

@@ -8,6 +8,8 @@ public interface VehicleRepository {
 
 	void save(Vehicle vehicle);
 	
+	Vehicle findVehicleByLicensePlate(String licensePlate);
+	
 	List<Vehicle> findAll();
 	
 }

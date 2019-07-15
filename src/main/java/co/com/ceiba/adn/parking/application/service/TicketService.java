@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import co.com.ceiba.adn.parking.infrastructure.adapter.entity.TicketEntity;
-import co.com.ceiba.adn.parking.infrastructure.adapter.repository.jpa.ParkingTicketRepositoryJPA;
+import co.com.ceiba.adn.parking.domain.model.ParkingTicket;
+import co.com.ceiba.adn.parking.domain.model.Vehicle;
+import co.com.ceiba.adn.parking.domain.repository.TicketRepository;
+import co.com.ceiba.adn.parking.infrastructure.adapter.entity.ParkingTicketEntity;
 import lombok.Data;
 
 /**
@@ -19,20 +21,24 @@ import lombok.Data;
 public class TicketService {
 
 	@Autowired
-	private ParkingTicketRepositoryJPA ticketRepository;
+	private TicketRepository ticketRepository;
 	/**
 	 * Access to save ticket
-	 * @param ticket objet ticket to be saved
+	 * @param ticket object ticket to be saved
 	 * @return return ticked to save as a saved ticked
 	 */
-	public TicketEntity saveTicket(TicketEntity ticket) {
+	public ParkingTicket saveTicket(ParkingTicket ticket) {
 		return ticketRepository.save(ticket);
 	}
 	/**
 	 * get a list of all tickets at parking
 	 * @return list of tickets
 	 */
-	public List<TicketEntity> findAllTickets() {
-		return ticketRepository.findAllTickets();
+	public List<ParkingTicket> findAllTickets() {
+		return ticketRepository.findAll();
+	}
+	
+	public  ParkingTicket findByVehicle(Vehicle vehicle) {
+		return ticketRepository.findByVehicle(vehicle);
 	}
 }
