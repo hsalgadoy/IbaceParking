@@ -15,15 +15,16 @@ import lombok.Setter;
 public class ParkingTicket {
 	
 	private long TicketNumber;
-	
+
 	private Vehicle vehicle;
-	
+
 	private LocalDateTime inTimeDate;
-	
+
 	private LocalDateTime outTimeDate;
-	
-	
-	
+
 	private double grossTotal;
+	
+	
+	
 	
 }

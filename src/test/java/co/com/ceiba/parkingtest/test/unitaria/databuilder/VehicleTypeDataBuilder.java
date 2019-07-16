@@ -1,11 +1,8 @@
 package co.com.ceiba.parkingtest.test.unitaria.databuilder;
 
-import java.util.List;
-
-import co.com.ceiba.adn.parking.domain.model.Vehicle;
 import co.com.ceiba.adn.parking.domain.model.VehicleType;
 
-public class TypeTestDataBuilder {
+public class VehicleTypeDataBuilder {
 
 	private static final int TYPE_ID = 1;
 	private static final long COST_BY_HOUR = 500;
@@ -27,7 +24,7 @@ public class TypeTestDataBuilder {
 	private double DisplacementCost;
 
 	
-	public TypeTestDataBuilder() {
+	public VehicleTypeDataBuilder() {
 		
 		this.dayValue = COST_BY_DAY;
 		this.hourValue = COST_BY_HOUR;
@@ -41,37 +38,37 @@ public class TypeTestDataBuilder {
 
 	
 
-	public TypeTestDataBuilder withIdVehicleType(int idVehicleType) {
+	public VehicleTypeDataBuilder withIdVehicleType(int idVehicleType) {
 		this.idVehicleType = idVehicleType;
 		return this;
 	}
 
 
-	public TypeTestDataBuilder withHourValue(double hourValue) {
+	public VehicleTypeDataBuilder withHourValue(double hourValue) {
 		this.hourValue = hourValue;
 		return this;
 	}
 
 
-	public TypeTestDataBuilder withDayValue(double dayValue) {
+	public VehicleTypeDataBuilder withDayValue(double dayValue) {
 		this.dayValue = dayValue;
 		return this;
 	}
 
 
-	public TypeTestDataBuilder withParkingSpace(int parkingSpace) {
+	public VehicleTypeDataBuilder withParkingSpace(int parkingSpace) {
 		this.parkingSpace = parkingSpace;
 		return this;
 	}
 
 
-	public TypeTestDataBuilder withSpaceAviable(int spaceAviable) {
+	public VehicleTypeDataBuilder withSpaceAviable(int spaceAviable) {
 		this.spaceAviable = spaceAviable;
 		return this;
 	}
 
 
-	public TypeTestDataBuilder withDisplacementCost(double displacementCost) {
+	public VehicleTypeDataBuilder withDisplacementCost(double displacementCost) {
 		DisplacementCost = displacementCost;
 		return this;
 	}

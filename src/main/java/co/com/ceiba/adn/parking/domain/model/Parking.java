@@ -35,6 +35,7 @@ public class Parking {
 	private static final int MAXIMUN_CAPACITY_CARS = 20;
 	private static final int MAXIMUN_CAPACITY_MOTORBYKE = 10;
 	private static final int EXTRA_RATE_CYLINDER = 500;
+	
 	@Autowired
 	VehicleTypeRepository typeRepository;
 

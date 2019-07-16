@@ -12,13 +12,11 @@ import lombok.Setter;
 @Setter
 public class Vehicle {
 
-
 	private String licensePlate;
-	
-	private  double displacement;
-	
+
+	private double displacement;
+
 	private int vehicleType;
-	
 	
 	
 	

@@ -6,9 +6,9 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
 
 import co.com.ceiba.adn.parking.domain.model.VehicleType;
-import co.com.ceiba.parkingtest.test.unitaria.databuilder.TypeTestDataBuilder;
+import co.com.ceiba.parkingtest.test.unitaria.databuilder.VehicleTypeDataBuilder;
 
-public class TypeTest {
+public class VehicleTypeTest {
 
 	public static final int TYPE_ID = 2;
 	public static final double COST_BY_DAY = 8000L;
@@ -21,7 +21,7 @@ public class TypeTest {
 	public void seup() {
 		//arrange
 		
-		TypeTestDataBuilder typeBuilder = new TypeTestDataBuilder();
+		VehicleTypeDataBuilder typeBuilder = new VehicleTypeDataBuilder();
 		
 		//act
 		
