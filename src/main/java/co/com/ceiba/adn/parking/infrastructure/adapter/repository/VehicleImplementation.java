@@ -1,6 +1,5 @@
 package co.com.ceiba.adn.parking.infrastructure.adapter.repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +23,18 @@ public class VehicleImplementation implements VehicleRepository{
 		vehicleRepositoryJPA.save(VehicleMapper.toEntity(vehicle));
 	}
 	
-	@Override
-	public List<Vehicle> findAll(){
-		return new ArrayList<Vehicle>();
-	}
+
 
 	@Override
 	public Vehicle findVehicleByLicensePlate(String licensePlate) {
+		
+		return null;
+	}
+
+
+
+	@Override
+	public List<Vehicle> findAll() {
 		
 		return null;
 	}
