@@ -67,8 +67,13 @@ public class Parking {
 	}
 
 	public boolean validateVehicleInDate(ParkingTicket parkingTicket) {
-		return (Objects.equals((parkingTicket.getInTimeDate().getDay()+1),Calendar.SUNDAY)
-				|| Objects.equals((parkingTicket.getInTimeDate().getDay()+1),Calendar.MONDAY));
+		
+		Calendar calInt = Calendar.getInstance();
+		Calendar calOut = Calendar.getInstance();
+		calInt.setTime(parkingTicket.getInTimeDate());
+		calOut.setTime(parkingTicket.getInTimeDate());
+		return (Objects.equals((calInt.get(Calendar.DAY_OF_WEEK)),Calendar.SUNDAY)
+				|| Objects.equals((calInt.get(Calendar.DAY_OF_WEEK)),Calendar.MONDAY));
 
 	}
 

@@ -3,15 +3,11 @@ package co.com.ceiba.parkingtest.test.unitaria.dominio;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.dao.DataAccessResourceFailureException;
 
 import co.com.ceiba.adn.parking.domain.model.ParkingTicket;
 import co.com.ceiba.adn.parking.domain.model.Vehicle;
