@@ -1,6 +1,8 @@
 package co.com.ceiba.parkingtest.test.unitaria.databuilder;
 
-import java.time.LocalDateTime;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import co.com.ceiba.adn.parking.domain.model.ParkingTicket;
 import co.com.ceiba.adn.parking.domain.model.Vehicle;
@@ -12,22 +14,25 @@ public class ParkingTicketDataBuilder {
 	private static final String OUT_DATE = "10/06/2019 20:00:00";
 	private static final Vehicle VEHICLE_T = new VehicleDataBuilder().build() ;
 	private static final double TOTAL_TICKET = 6000;
-
+	
+	public final SimpleDateFormat formato = new SimpleDateFormat("dd/mm/yyyy hh:mm");
+	
 	private long TicketNumber;
 
 	private Vehicle vehicle = new VehicleDataBuilder().build();
 
-	private LocalDateTime inTimeDate;
+	private Date inTimeDate;
 
-	private LocalDateTime outTimeDate;
+	private Date outTimeDate;
 
 	private double grossTotal;
 	
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	
-	public ParkingTicketDataBuilder() {
+	public ParkingTicketDataBuilder() throws ParseException {
 		this.TicketNumber = TICKET_NUM;
-		this.inTimeDate = LocalDateTime.parse(IN_DATE);
-		this.outTimeDate = LocalDateTime.parse(OUT_DATE);
+		this.inTimeDate = formato.parse(IN_DATE);
+		this.outTimeDate =formato.parse(OUT_DATE);
 		this.vehicle= VEHICLE_T;
 		this.grossTotal = TOTAL_TICKET;
 	}
@@ -43,12 +48,12 @@ public class ParkingTicketDataBuilder {
 
 
 
-	public ParkingTicketDataBuilder withInTimeDate(LocalDateTime inTimeDate) {
+	public ParkingTicketDataBuilder withInTimeDate(Date inTimeDate) {
 		this.inTimeDate = inTimeDate;
 		return this;
 	}
 
-	public ParkingTicketDataBuilder withOutTimeDate(LocalDateTime outTimeDate) {
+	public ParkingTicketDataBuilder withOutTimeDate(Date outTimeDate) {
 		this.outTimeDate = outTimeDate;
 		return this;
 	}

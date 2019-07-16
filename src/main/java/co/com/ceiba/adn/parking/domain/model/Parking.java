@@ -2,6 +2,7 @@ package co.com.ceiba.adn.parking.domain.model;
 
 import java.time.LocalDateTime;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -35,11 +36,11 @@ public class Parking {
 	private static final int MAXIMUN_CAPACITY_CARS = 20;
 	private static final int MAXIMUN_CAPACITY_MOTORBYKE = 10;
 	private static final int EXTRA_RATE_CYLINDER = 500;
-	
+
 	@Autowired
 	VehicleTypeRepository typeRepository;
 
-	public ParkingTicket validateEntryVehicle(ParkingTicket ticket, LocalDateTime inDate) {
+	public ParkingTicket validateEntryVehicle(ParkingTicket ticket, Date inDate) {
 
 		if (!(Objects.equals(ticket.getVehicle().getVehicleType(), TYPE_CAR)
 				|| Objects.equals(ticket.getVehicle().getVehicleType(), TYPE_MOTORBYKE))) {
@@ -66,10 +67,8 @@ public class Parking {
 	}
 
 	public boolean validateVehicleInDate(ParkingTicket parkingTicket) {
-		return (Objects.equals(localDateTimeToDate(parkingTicket.getInTimeDate()).get(Calendar.DAY_OF_WEEK),
-				Calendar.SUNDAY)
-				|| Objects.equals(localDateTimeToDate(parkingTicket.getInTimeDate()).get(Calendar.DAY_OF_WEEK),
-						Calendar.MONDAY));
+		return (Objects.equals((parkingTicket.getInTimeDate().getDay()+1),Calendar.SUNDAY)
+				|| Objects.equals((parkingTicket.getInTimeDate().getDay()+1),Calendar.MONDAY));
 
 	}
 
@@ -103,9 +102,9 @@ public class Parking {
 
 	public ParkingTicket validateVehicelOut(Vehicle vehicle, ParkingTicket ticketParking) {
 		ParkingTicket ticket = new ParkingTicket();
-		LocalDateTime inDate;
-		LocalDateTime outDate;
-		outDate = LocalDateTime.now();
+		Date inDate;
+		Date outDate;
+		outDate = new Date();
 		inDate = ticketParking.getInTimeDate();
 		ticket.setOutTimeDate(outDate);
 		ticket.setGrossTotal(calculateTotalParking(inDate, outDate,
@@ -114,16 +113,14 @@ public class Parking {
 		return ticket;
 	}
 
-	public long calculateTotalParking(LocalDateTime inDateTime, LocalDateTime outDateTime, VehicleType type,
-			Vehicle vehicle) {
+	public long calculateTotalParking(Date inDateTime, Date outDateTime, VehicleType type, Vehicle vehicle) {
 		long cost = 0;
 
-		long serviceTime = TimeUnit.SECONDS.toHours(((long)outDateTime.getSecond() - (long)inDateTime.getSecond()));
+		long serviceTime = TimeUnit.MILLISECONDS.toHours((outDateTime.getTime() - inDateTime.getTime()));
 
 		while (serviceTime >= 24) {
 			cost += type.getDayValue();
 			serviceTime -= 24;
-			
 
 		}
 		cost += (serviceTime >= 9 ? type.getHourValue() : type.getHourValue() * serviceTime)

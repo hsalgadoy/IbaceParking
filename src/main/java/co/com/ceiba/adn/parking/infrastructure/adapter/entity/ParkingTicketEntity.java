@@ -1,6 +1,6 @@
 package co.com.ceiba.adn.parking.infrastructure.adapter.entity;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,10 +31,10 @@ public class ParkingTicketEntity {
 	private VehicleEntity vehicle;
 	
 	@Column(name = "IN_TIME_DATE")
-	private LocalDateTime inTimeDate;
+	private Date inTimeDate;
 	
 	@Column(name = "OUT_TIME_DATE")
-	private LocalDateTime outTimeDate;
+	private Date outTimeDate;
 	
 	@Column(name = "DISPLACEMENT_COST")
 	private double DisplacementlCost;

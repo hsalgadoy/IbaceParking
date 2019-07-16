@@ -1,6 +1,6 @@
 package co.com.ceiba.adn.parking.domain.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,9 +18,9 @@ public class ParkingTicket {
 
 	private Vehicle vehicle;
 
-	private LocalDateTime inTimeDate;
+	private Date inTimeDate;
 
-	private LocalDateTime outTimeDate;
+	private Date outTimeDate;
 
 	private double grossTotal;
 	

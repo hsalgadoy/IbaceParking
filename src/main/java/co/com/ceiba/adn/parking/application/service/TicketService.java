@@ -1,6 +1,6 @@
 package co.com.ceiba.adn.parking.application.service;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class TicketService {
 	
 	
 	public void registryIn(Vehicle vehicle) {
-		LocalDateTime inDateTime = LocalDateTime.now();
+		Date inDateTime = new Date();
 		ParkingTicket ticket = new ParkingTicket();
 		ticket.setInTimeDate(inDateTime);
 		ticket.setVehicle(vehicle);
