@@ -8,9 +8,6 @@ import co.com.ceiba.adn.parking.infrastructure.adapter.entity.ParkingTicketEntit
 @Component
 public final class ParkingTicketMapper {
 	
-	public ParkingTicketMapper() {
-		
-	}
 
 	public static ParkingTicket toDomain(ParkingTicketEntity entity) {
 		ParkingTicket parkingTicket = new ParkingTicket();
