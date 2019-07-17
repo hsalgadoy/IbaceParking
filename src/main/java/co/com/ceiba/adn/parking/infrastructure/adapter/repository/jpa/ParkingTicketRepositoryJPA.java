@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import co.com.ceiba.adn.parking.domain.model.ParkingTicket;
 import co.com.ceiba.adn.parking.infrastructure.adapter.entity.ParkingTicketEntity;
 
 /**
@@ -13,11 +14,12 @@ import co.com.ceiba.adn.parking.infrastructure.adapter.entity.ParkingTicketEntit
  *
  */
 @Repository
-public interface ParkingTicketRepositoryJPA extends JpaRepository<ParkingTicketEntity, Long> {
-	public <S> S save(ParkingTicketEntity parkingTicketEntity);
+public interface ParkingTicketRepositoryJPA extends JpaRepository<ParkingTicketEntity, Integer> {
 
-	public List<ParkingTicketEntity> findAllTickets();
+	public List<ParkingTicketEntity> findAll();
 
-	public ParkingTicketEntity findTicketNumber(long ticketNumber);
+	void save(ParkingTicket parkingTicket);
+
+	public ParkingTicketEntity findByTicketNumber(int ticketNumber);
 
 }

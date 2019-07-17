@@ -34,6 +34,8 @@ public class VehicleTypeEntity {
 	@Column(name="SPACE_AVIABLE")
 	private int spaceAviable;
 	
+	@Column(name="EXTRA_COST")
+	private double displacementCost;
 	@OneToMany(mappedBy="vehicleType")
 	private List<VehicleEntity> vehicles;
 	

@@ -24,7 +24,7 @@ import lombok.Setter;
 public class ParkingTicketEntity {
 	@Id
 	@GeneratedValue
-	private long TicketNumber;
+	private int ticketNumber;
 	
 	@ManyToOne
 	@JoinColumn(name="LICENSE_PLATE", nullable=false)
@@ -37,7 +37,7 @@ public class ParkingTicketEntity {
 	private Date outTimeDate;
 	
 	@Column(name = "DISPLACEMENT_COST")
-	private double DisplacementlCost;
+	private double displacementlCost;
 	
 	@Column(name = "GROSS_TOTAL")
 	private double grossTotal;

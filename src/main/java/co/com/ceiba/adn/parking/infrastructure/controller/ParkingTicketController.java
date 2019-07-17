@@ -1,6 +1,5 @@
 package co.com.ceiba.adn.parking.infrastructure.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,8 +13,12 @@ import co.com.ceiba.adn.parking.domain.model.ParkingTicket;
 @RestController
 @RequestMapping("/api/ticket")
 public class ParkingTicketController {
-	@Autowired
-	private TicketService ticketService;
+	
+	private final TicketService ticketService;
+	
+	public ParkingTicketController(final TicketService ticketService) {
+		this.ticketService = ticketService;
+	}
 	
 	@PostMapping
 	public ResponseEntity<ParkingTicket> toRegisterVehicle(@RequestBody ParkingTicket ticket){

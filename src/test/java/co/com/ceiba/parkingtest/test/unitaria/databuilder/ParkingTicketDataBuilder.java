@@ -17,7 +17,7 @@ public class ParkingTicketDataBuilder {
 	
 	public final SimpleDateFormat formato = new SimpleDateFormat("dd/mm/yyyy hh:mm");
 	
-	private long TicketNumber;
+	private int TicketNumber;
 
 	private Vehicle vehicle = new VehicleDataBuilder().build();
 
@@ -41,7 +41,7 @@ public class ParkingTicketDataBuilder {
 		this.vehicle = vehicle;
 		return this;
 	}
-	public ParkingTicketDataBuilder withTicketNumber(long ticketNumber) {
+	public ParkingTicketDataBuilder withTicketNumber(int ticketNumber) {
 		TicketNumber = ticketNumber;
 		return this;
 	}

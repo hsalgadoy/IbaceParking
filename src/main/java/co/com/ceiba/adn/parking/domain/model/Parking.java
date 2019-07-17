@@ -12,8 +12,6 @@ import org.springframework.stereotype.Component;
 import co.com.ceiba.adn.parking.domain.exception.ParkingException;
 import co.com.ceiba.adn.parking.domain.exception.VehicleTypeException;
 import co.com.ceiba.adn.parking.domain.repository.VehicleTypeRepository;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 
@@ -21,8 +19,6 @@ import lombok.Setter;
  *
  */
 
-@Getter
-@Setter
 @Component
 public class Parking {
 	private static final int TYPE_CAR = 2;

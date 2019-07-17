@@ -33,7 +33,7 @@ public class VehicleTypeService {
 	 * @return list of tickets
 	 */
 	public List<VehicleType> findAllTypes() {
-		return vehicleTypeRepository.findAll();
+		return vehicleTypeRepository.getVehicleTypes();
 	}
 
 	

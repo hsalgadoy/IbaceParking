@@ -1,6 +1,7 @@
 package co.com.ceiba.adn.parking.infrastructure.adapter.mapper;
 
 import co.com.ceiba.adn.parking.domain.model.Vehicle;
+import co.com.ceiba.adn.parking.domain.model.VehicleType;
 import co.com.ceiba.adn.parking.infrastructure.adapter.entity.VehicleEntity;
 import co.com.ceiba.adn.parking.infrastructure.adapter.entity.VehicleTypeEntity;
 
@@ -10,14 +11,16 @@ public class VehicleTypeMapper {
 
 	}
 
-	public static Vehicle entityToDomain(VehicleEntity vehicleEntity) {
-		Vehicle vehicleDomain = new Vehicle();
+	public static VehicleType entityToDomain(VehicleTypeEntity entity) {
+		VehicleType vehicleType = new VehicleType();
+		vehicleType.setDayValue(entity.getDayValue());
+		vehicleType.setDisplacementCost(entity.getDisplacementCost());
+		vehicleType.setHourValue(entity.getHourValue());
+		vehicleType.setIdVehicleType(entity.getIdVehicleType());
+		vehicleType.setParkingSpace(entity.getParkingSpace());
+		vehicleType.setSpaceAviable(entity.getSpaceAviable());
 
-		vehicleDomain.setLicensePlate(vehicleEntity.getLicensePlate());
-		vehicleDomain.setDisplacement(vehicleEntity.getDisplacement());
-		vehicleDomain.setVehicleType(vehicleDomain.getVehicleType());
-
-		return vehicleDomain;
+		return vehicleType;
 	}
 
 	public static VehicleEntity domainToEntity(Vehicle domain) {

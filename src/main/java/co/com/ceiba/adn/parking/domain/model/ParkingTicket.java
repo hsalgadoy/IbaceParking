@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 public class ParkingTicket {
 	
-	private long TicketNumber;
+	private int TicketNumber;
 
 	private Vehicle vehicle;
 
