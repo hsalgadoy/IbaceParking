@@ -7,26 +7,21 @@ import org.springframework.stereotype.Repository;
 
 import co.com.ceiba.adn.parking.domain.model.VehicleType;
 import co.com.ceiba.adn.parking.infrastructure.adapter.entity.VehicleTypeEntity;
+
 /**
  * 
  * @author hsneider.salgado
  *
  */
 @Repository
-public interface VehicleTypeRepositoryJpa extends JpaRepository<VehicleTypeEntity, Integer>{
+public interface VehicleTypeRepositoryJpa extends JpaRepository<VehicleTypeEntity, Integer> {
 
-	void putAviablePlacesByType(int idVehicleType, int places);
-
-	int obtainAviablePlacesBytType(int idVehicleType);
-
-	void saveVehicleType(VehicleType vehicleType);
-
-	List<VehicleType> getVehicleTypes();
+	<S> S save(VehicleTypeEntity vehicleType);
 
 	VehicleType save(VehicleType type);
-		
-	VehicleType findByVehicleTypeId(int vehicleTypeId);
-	
+
+	VehicleTypeEntity findByIdVehicleType(int vehicleTypeId);
+
 	List<VehicleTypeEntity> findAll();
-	
+
 }

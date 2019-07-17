@@ -35,6 +35,8 @@ public class TicketService {
 		ParkingTicket ticket = new ParkingTicket();
 		ticket.setInTimeDate(inDateTime);
 		ticket.setVehicle(vehicle);
+		vehicleTypeRepository.findByVehicleTypeId(vehicle.getVehicleType());
+		vehicleRepository.save(vehicle);
 		this.save(ticket);
 	}
 

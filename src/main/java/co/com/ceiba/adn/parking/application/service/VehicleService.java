@@ -7,14 +7,13 @@ import org.springframework.stereotype.Service;
 
 import co.com.ceiba.adn.parking.domain.model.Vehicle;
 import co.com.ceiba.adn.parking.domain.repository.VehicleRepository;
-import lombok.Data;
 
 /**
  * 
  * @author hsneider.salgado
  *
  */
-@Data
+
 @Service
 public class VehicleService {
 	

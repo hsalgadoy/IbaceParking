@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import co.com.ceiba.adn.parking.domain.model.VehicleType;
 import co.com.ceiba.adn.parking.domain.repository.VehicleTypeRepository;
@@ -11,14 +12,15 @@ import co.com.ceiba.adn.parking.infrastructure.adapter.entity.VehicleTypeEntity;
 import co.com.ceiba.adn.parking.infrastructure.adapter.mapper.VehicleTypeMapper;
 import co.com.ceiba.adn.parking.infrastructure.adapter.repository.jpa.VehicleTypeRepositoryJpa;
 
+@Repository
 public class VechicleTypeImplementation implements VehicleTypeRepository {
-
+ 
 	@Autowired
 	private VehicleTypeRepositoryJpa vehicleTypeRapository;
 
 	@Override
 	public void putAviablePlacesByType(int idVehicleType, int places) {
-		VehicleType vehicleType = vehicleTypeRapository.findByVehicleTypeId(idVehicleType);
+		VehicleType vehicleType = VehicleTypeMapper.entityToDomain(vehicleTypeRapository.findByIdVehicleType(idVehicleType));
 		vehicleType.setSpaceAviable(places);
 		vehicleTypeRapository.save(vehicleType);
 
@@ -26,7 +28,7 @@ public class VechicleTypeImplementation implements VehicleTypeRepository {
 
 	@Override
 	public int obtainAviablePlacesBytType(int idVehicleType) {
-		return vehicleTypeRapository.findByVehicleTypeId(idVehicleType).getSpaceAviable();
+		return vehicleTypeRapository.findByIdVehicleType(idVehicleType).getSpaceAviable();
 	}
 
 	@Override
@@ -49,7 +51,7 @@ public class VechicleTypeImplementation implements VehicleTypeRepository {
 	}
 
 	@Override
-	public VehicleType findByVehicleTypeId(int vehicleTypeId) {
-		return vehicleTypeRapository.findByVehicleTypeId(vehicleTypeId);
+	public VehicleType findByVehicleTypeId(int idVehicleType) {
+		return VehicleTypeMapper.entityToDomain(vehicleTypeRapository.findByIdVehicleType(idVehicleType));
 	}
 }

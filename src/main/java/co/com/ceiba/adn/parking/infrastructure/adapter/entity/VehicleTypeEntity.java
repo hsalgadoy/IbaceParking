@@ -9,6 +9,7 @@ import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.Setter;
+
 /**
  * 
  * @author hsneider.salgado
@@ -19,24 +20,24 @@ import lombok.Setter;
 @Setter
 public class VehicleTypeEntity {
 	@Id
-	@Column(name="ID_VEHICLE_TYPE")
+	@Column(name = "ID_VEHICLE_TYPE")
 	private int idVehicleType;
-	
-	@Column(name="HOUR_VALUE")
+
+	@Column(name = "HOUR_VALUE")
 	private double hourValue;
-	
-	@Column(name="DAY_VALUE")
+
+	@Column(name = "DAY_VALUE")
 	private double dayValue;
-	
-	@Column(name="PARKING_SPACE")
+
+	@Column(name = "PARKING_SPACE")
 	private int parkingSpace;
-	
-	@Column(name="SPACE_AVIABLE")
+
+	@Column(name = "SPACE_AVIABLE")
 	private int spaceAviable;
-	
-	@Column(name="EXTRA_COST")
+
+	@Column(name = "EXTRA_COST")
 	private double displacementCost;
-	@OneToMany(mappedBy="vehicleType")
+	@OneToMany(mappedBy = "vehicleType")
 	private List<VehicleEntity> vehicles;
-	
+
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import co.com.ceiba.adn.parking.domain.model.Vehicle;
 @Repository
-public interface VehicleRepository {
+public interface VehicleRepository  {
 
 	void save(Vehicle vehicle);
 	
