@@ -35,7 +35,7 @@ public class TicketService {
 		ParkingTicket ticket = new ParkingTicket();
 		ticket.setInTimeDate(inDateTime);
 		ticket.setVehicle(vehicle);
-		this.saveTicket(ticket);
+		this.save(ticket);
 	}
 	
 	
@@ -44,7 +44,7 @@ public class TicketService {
 	 * @param ticket object ticket to be saved
 	 * @return return ticked to save as a saved ticked
 	 */
-	public ParkingTicket saveTicket(ParkingTicket ticket) {
+	public ParkingTicket save(ParkingTicket ticket) {
 		return ticketRepository.save(ticket);
 	}
 	/**
