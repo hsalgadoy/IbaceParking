@@ -17,6 +17,8 @@ public class VehicleType {
 	
 	private double dayValue;
 	
+	private String description;
+	
 	private int parkingSpace;
 	
 	private int spaceAviable;

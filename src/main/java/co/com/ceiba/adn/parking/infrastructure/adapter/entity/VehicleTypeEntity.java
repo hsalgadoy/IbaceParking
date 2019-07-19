@@ -1,11 +1,8 @@
 package co.com.ceiba.adn.parking.infrastructure.adapter.entity;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +19,10 @@ public class VehicleTypeEntity {
 	@Id
 	@Column(name = "ID_VEHICLE_TYPE")
 	private int idVehicleType;
-
+	
+	@Column(name="TYPE_DESCRIPTION")
+	private String description;
+	
 	@Column(name = "HOUR_VALUE")
 	private double hourValue;
 
@@ -37,7 +37,6 @@ public class VehicleTypeEntity {
 
 	@Column(name = "EXTRA_COST")
 	private double displacementCost;
-	@OneToMany(mappedBy = "vehicleType")
-	private List<VehicleEntity> vehicles;
+	
 
 }

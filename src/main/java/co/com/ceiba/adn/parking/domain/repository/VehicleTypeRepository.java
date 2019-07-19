@@ -20,5 +20,7 @@ public interface VehicleTypeRepository {
 	VehicleType save(VehicleType type);
 
 	VehicleType findByVehicleTypeId(int vehicleTypeId);
+	
+	
 
 }

@@ -19,12 +19,14 @@ public final class ParkingTicketMapper {
 		return parkingTicket;
 	}
 
-	public static ParkingTicketEntity toEntity(ParkingTicket domain) {
+	public static ParkingTicketEntity toEntity(ParkingTicket domain){
 		ParkingTicketEntity parkingTicketEntity = new ParkingTicketEntity();
 		
 		parkingTicketEntity.setTicketNumber(domain.getTicketNumber());
 		parkingTicketEntity.setInTimeDate(domain.getInTimeDate());
 		parkingTicketEntity.setOutTimeDate(domain.getOutTimeDate());
+		
+		
 		parkingTicketEntity.setVehicle(VehicleMapper.toEntity(domain.getVehicle()));
 		parkingTicketEntity.setGrossTotal(domain.getGrossTotal());
 		

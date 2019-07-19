@@ -1,8 +1,6 @@
 package co.com.ceiba.adn.parking.infrastructure.adapter.mapper;
 
-import co.com.ceiba.adn.parking.domain.model.Vehicle;
 import co.com.ceiba.adn.parking.domain.model.VehicleType;
-import co.com.ceiba.adn.parking.infrastructure.adapter.entity.VehicleEntity;
 import co.com.ceiba.adn.parking.infrastructure.adapter.entity.VehicleTypeEntity;
 
 public class VehicleTypeMapper {
@@ -16,6 +14,7 @@ public class VehicleTypeMapper {
 		vehicleType.setDayValue(entity.getDayValue());
 		vehicleType.setDisplacementCost(entity.getDisplacementCost());
 		vehicleType.setHourValue(entity.getHourValue());
+		vehicleType.setDescription(entity.getDescription());
 		vehicleType.setIdVehicleType(entity.getIdVehicleType());
 		vehicleType.setParkingSpace(entity.getParkingSpace());
 		vehicleType.setSpaceAviable(entity.getSpaceAviable());
@@ -23,15 +22,15 @@ public class VehicleTypeMapper {
 		return vehicleType;
 	}
 
-	public static VehicleEntity domainToEntity(Vehicle domain) {
-		VehicleEntity vehicleEntity = new VehicleEntity();
+	public static VehicleTypeEntity domainToEntity(VehicleType domain) {
 		VehicleTypeEntity vehicleTypeEntity = new VehicleTypeEntity();
+		vehicleTypeEntity.setIdVehicleType(domain.getIdVehicleType());
+		vehicleTypeEntity.setDayValue(domain.getDayValue());
+		vehicleTypeEntity.setDisplacementCost(domain.getDisplacementCost());
+		vehicleTypeEntity.setHourValue(domain.getHourValue());
+		vehicleTypeEntity.setParkingSpace(domain.getParkingSpace());
+		vehicleTypeEntity.setSpaceAviable(domain.getSpaceAviable());
 
-		vehicleEntity.setLicensePlate(domain.getLicensePlate());
-
-		vehicleTypeEntity.setIdVehicleType(domain.getVehicleType());
-		vehicleEntity.setVehicleType(vehicleTypeEntity);
-
-		return vehicleEntity;
+		return vehicleTypeEntity;
 	}
 }

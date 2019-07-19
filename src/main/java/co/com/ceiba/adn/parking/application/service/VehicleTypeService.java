@@ -35,6 +35,10 @@ public class VehicleTypeService {
 	public List<VehicleType> findAllTypes() {
 		return vehicleTypeRepository.getVehicleTypes();
 	}
+	
+	public VehicleType findByIdType(int type) {
+		return vehicleTypeRepository.findByVehicleTypeId(type);
+	}
 
 	
 		

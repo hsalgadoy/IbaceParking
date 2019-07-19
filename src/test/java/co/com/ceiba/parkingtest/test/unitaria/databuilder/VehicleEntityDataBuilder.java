@@ -37,7 +37,7 @@ public class VehicleEntityDataBuilder {
 		VehicleEntity vehicleEntity = new VehicleEntity();
 		vehicleEntity.setDisplacement(this.displacement);
 		vehicleEntity.setLicensePlate(this.licensePlate);
-		vehicleEntity.setVehicleType(this.vehicleType);
+		vehicleEntity.setVehicleType(this.vehicleType.getIdVehicleType());
 		return vehicleEntity;
 	}
 

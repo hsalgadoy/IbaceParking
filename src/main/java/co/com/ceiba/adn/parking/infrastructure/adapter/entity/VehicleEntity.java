@@ -3,8 +3,6 @@ package co.com.ceiba.adn.parking.infrastructure.adapter.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,14 +16,14 @@ import lombok.Setter;
 @Setter
 public class VehicleEntity {
 	@Id
-	@Column(name="LICENSE_PLATE", nullable=false, length=6 )
+	@Column(name="LICENSE_PLATE")
 	private String licensePlate;
 	
 	@Column(name="DISPLACEMENT")
 	private  double displacement;
-	@ManyToOne
-	@JoinColumn(name="ID_VEHICLE_TYPE", nullable=false)
-	private VehicleTypeEntity vehicleType;
+	
+	@Column(name="VEHICLE_TYPE_ID")
+	private int vehicleType;
 	
 	
 }
