@@ -1,0 +1,1 @@
+Insert into vehicle_type_entity ( id_vehicle_type, day_value, extra_cost, hour_value, parking_space, space_aviable) values (1,2000,2000,500,10,10);

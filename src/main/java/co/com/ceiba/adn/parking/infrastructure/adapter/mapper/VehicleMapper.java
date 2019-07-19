@@ -34,6 +34,7 @@ public final class VehicleMapper {
 		vehicleEntity.setLicensePlate(domain.getLicensePlate());
 
 		vehicleTypeEntity.setIdVehicleType(domain.getVehicleType());
+		
 		vehicleEntity.setVehicleType(vehicleTypeEntity);
 
 		return vehicleEntity;
