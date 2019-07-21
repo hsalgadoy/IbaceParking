@@ -73,13 +73,6 @@ public class Parking {
 
 	}
 
-	public static Calendar localDateTimeToDate(LocalDateTime localDateTime) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.clear();
-		calendar.set(localDateTime.getYear(), localDateTime.getMonthValue() - 1, localDateTime.getDayOfMonth(),
-				localDateTime.getHour(), localDateTime.getMinute(), localDateTime.getSecond());
-		return calendar;
-	}
 
 	public boolean validateParkinPlaces(long counterParkingPlaces, int vechileTypeId) {
 		switch (vechileTypeId) {

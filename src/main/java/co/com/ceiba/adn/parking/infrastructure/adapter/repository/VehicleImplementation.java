@@ -27,8 +27,8 @@ public class VehicleImplementation implements VehicleRepository{
 
 	@Override
 	public Vehicle findVehicleByLicensePlate(String licensePlate) {
+		return VehicleMapper.toDomain(vehicleRepositoryJPA.findVehicleByLicensePlate(licensePlate));
 		
-		return null;
 	}
 
 
