@@ -31,7 +31,47 @@ import co.com.ceiba.parkingtest.test.unitaria.databuilder.VehicleDataBuilder;
 @SpringBootTest(classes = ParkingApplication.class)
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application-test.yaml")
-public class VehicleControllerIntTest {
+public class VehicleTypeControllerIntTest {
 
+	public static final String LISENCE_PLATE="RQG72E";
+	public static final String LISENCE_PLATE_OPTIONAL="RQR45A";
+	public static final int TYPE = 1;
+	public static final long DISPLACEMENT=200;
 	
+	@Autowired
+	private WebApplicationContext context;
+	
+	private MockMvc mockMvc;
+	private Vehicle vechile;
+	private ObjectWriter objectWriter;
+	
+	
+	@Before
+	public void setUp() {
+		mockMvc= MockMvcBuilders.webAppContextSetup(context).build();
+		VehicleDataBuilder vehicleDataBuilder = new VehicleDataBuilder().withDisplacement(DISPLACEMENT).withLicensePlate(LISENCE_PLATE).withVehicleType(TYPE);
+		vechile=vehicleDataBuilder.build();
+		ObjectMapper objectMapper= new ObjectMapper();
+		objectMapper.registerModule(new JavaTimeModule());
+		objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+		objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+		objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
+				
+	}
+	
+	
+	@Test
+	public void saveVehicle() throws Exception{
+		String vehicleJson = objectWriter.writeValueAsString(vechile);
+		mockMvc.perform(post("/api/vehiculo").contentType(MediaType.APPLICATION_JSON_UTF8).content(vehicleJson))
+		.andDo(print()).andExpect(status().isCreated());
+	}
+	
+	@Test
+	public void consultarVehiculoPorPlaca() throws Exception {
+		mockMvc.perform(get("/api/vehicle/" + LISENCE_PLATE_OPTIONAL).contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andDo(print()).andExpect(status().isOk());
+	}
+
+
 }

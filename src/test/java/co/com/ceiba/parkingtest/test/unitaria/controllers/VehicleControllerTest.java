@@ -1,6 +1,5 @@
-package co.com.ceiba.parkingtest.test.integracion.controllers;
+package co.com.ceiba.parkingtest.test.unitaria.controllers;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -31,7 +30,41 @@ import co.com.ceiba.parkingtest.test.unitaria.databuilder.VehicleDataBuilder;
 @SpringBootTest(classes = ParkingApplication.class)
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application-test.yaml")
-public class VehicleControllerIntTest {
+public class VehicleControllerTest {
 
-	
+	public static final String LISENCE_PLATE = "RQG72E";
+	public static final String ANOTHER_PLATE = "RQR45A";
+	public static final int ID_TYPE = 1;
+	public static final int DISPLACEMENT = 200;
+
+	@Autowired
+	WebApplicationContext context;
+
+	private MockMvc mockMvc;
+	private Vehicle vehicle;
+	private ObjectWriter objectWriter;
+
+	@Before
+	public void setUp(){
+		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+		VehicleDataBuilder vehicleDataBuilder = new VehicleDataBuilder().withDisplacement(DISPLACEMENT)
+				.withLicensePlate(LISENCE_PLATE).withVehicleType(ID_TYPE);
+
+		vehicle = vehicleDataBuilder.build();
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.registerModule(new JavaTimeModule());
+		objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+		objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+		objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
+
+	}
+
+	@Test
+	public void saveVehicle() throws Exception {
+		String vehicleJson = objectWriter.writeValueAsString(vehicle);
+		mockMvc.perform(post("/api/vehicle").contentType(MediaType.APPLICATION_JSON_UTF8).content(vehicleJson))
+				.andDo(print()).andExpect(status().isCreated());
+	}
+
 }
