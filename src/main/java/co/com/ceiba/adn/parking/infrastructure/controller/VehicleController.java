@@ -23,7 +23,7 @@ public class VehicleController {
 	@PostMapping
 	public ResponseEntity<Vehicle> toRegisterVehicle(@RequestBody Vehicle vehicle) {
 		vehicleService.saveVehicle(vehicle);
-		return new ResponseEntity<Vehicle>(HttpStatus.CREATED);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 	@GetMapping("/VehicleLisencePlate")

@@ -67,7 +67,7 @@ public class TicketService {
 		if (ticket != null) {
 			ticket.setOutTimeDate(new Date());
 			ticket.setGrossTotal(calculateTotalParking(ticket.getInTimeDate(), ticket.getOutTimeDate(),
-					vehicleTypeRepository.findByVehicleTypeId(vehicle.getVehicleType()), vehicle));
+					vehicleTypeRepository.findByVehicleTypeId(vehicle.getVehicleType())));
 			return ticket;
 		}
 		return ticket;
@@ -84,7 +84,7 @@ public class TicketService {
 
 	}
 
-	public long calculateTotalParking(Date inDateTime, Date outDateTime, VehicleType type, Vehicle vehicle) {
+	public long calculateTotalParking(Date inDateTime, Date outDateTime, VehicleType type) {
 		long cost = 0;
 
 		long serviceTime = TimeUnit.MILLISECONDS.toHours((outDateTime.getTime() - inDateTime.getTime()));
@@ -96,10 +96,6 @@ public class TicketService {
 		}
 		cost += (serviceTime >= 9 ? type.getHourValue() : type.getHourValue() * serviceTime)
 				+ type.getDisplacementCost();
-
-		{
-
-		}
 		return cost;
 	}
 

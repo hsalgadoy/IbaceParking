@@ -23,6 +23,6 @@ public class ParkingTicketController {
 	@PostMapping
 	public ResponseEntity<ParkingTicket> toRegisterVehicle(@RequestBody ParkingTicket ticket){
 		ticketService.save(ticket);
-		return new ResponseEntity<ParkingTicket>(HttpStatus.CREATED);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 }

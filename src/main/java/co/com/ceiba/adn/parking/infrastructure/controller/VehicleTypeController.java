@@ -22,7 +22,7 @@ public class VehicleTypeController {
 	@PostMapping
 	public ResponseEntity<VehicleType> toRegisterVehicle(@RequestBody VehicleType type){
 		vehicleTypeRapository.save(type);
-		return new ResponseEntity<VehicleType>(HttpStatus.CREATED);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
 	

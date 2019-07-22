@@ -38,11 +38,11 @@ public class VechicleTypeImplementation implements VehicleTypeRepository {
 
 	@Override
 	public ArrayList<VehicleType> getVehicleTypes() {
-		List<VehicleType> types = new ArrayList<VehicleType>();
+		List<VehicleType> types = new ArrayList<>();
 		for (VehicleTypeEntity vehicleType : vehicleTypeRapository.findAll()) {
 			types.add(VehicleTypeMapper.entityToDomain(vehicleType));
 		}
-		return new ArrayList<VehicleType>(types);
+		return new ArrayList<>(types);
 	}
 
 	@Override
