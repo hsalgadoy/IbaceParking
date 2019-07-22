@@ -39,4 +39,11 @@ public class VehicleImplementation implements VehicleRepository{
 		return null;
 	}
 
+
+
+	@Override
+	public int countByLicensePlate(String licensePlate) {
+		return vehicleRepositoryJPA.CountByLisencePlate(licensePlate);
+	}
+
 }

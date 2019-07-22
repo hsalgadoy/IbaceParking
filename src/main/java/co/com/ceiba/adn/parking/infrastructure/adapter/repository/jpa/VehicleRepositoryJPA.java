@@ -17,5 +17,7 @@ public interface VehicleRepositoryJPA extends JpaRepository<VehicleEntity, Strin
 	void save(Vehicle vehicle);
 
 	VehicleEntity findVehicleByLicensePlate(String licensePlate);
+	
+	int CountByLisencePlate(String licensePlate);
 
 }

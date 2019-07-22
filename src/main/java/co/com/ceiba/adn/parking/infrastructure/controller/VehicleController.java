@@ -3,6 +3,8 @@ package co.com.ceiba.adn.parking.infrastructure.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +19,15 @@ public class VehicleController {
 
 	@Autowired
 	private VehicleService vehicleService;
-	
+
 	@PostMapping
-	public ResponseEntity<Vehicle> toRegisterVehicle(@RequestBody Vehicle vehicle){
+	public ResponseEntity<Vehicle> toRegisterVehicle(@RequestBody Vehicle vehicle) {
 		vehicleService.saveVehicle(vehicle);
 		return new ResponseEntity<Vehicle>(HttpStatus.CREATED);
 	}
-	
+
+	@GetMapping("/VehicleLisencePlate")
+	public ResponseEntity<Vehicle> get(@PathVariable("VehicleLisencePlate") String vehicleLisencePlate) {
+		return new ResponseEntity<> (vehicleService.ObtainVehicleByLicensePlate(vehicleLisencePlate),HttpStatus.OK);
+	}
 }

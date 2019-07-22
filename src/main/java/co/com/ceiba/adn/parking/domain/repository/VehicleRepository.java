@@ -13,5 +13,6 @@ public interface VehicleRepository  {
 	Vehicle findVehicleByLicensePlate(String licensePlate);
 	
 	List<Vehicle> findAll();
+	int countByLicensePlate(String licensePlate);
 	
 }

@@ -1,12 +1,18 @@
 package co.com.ceiba.adn.parking.application.service;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Service;
 
+import co.com.ceiba.adn.parking.domain.exception.ParkingException;
+import co.com.ceiba.adn.parking.domain.exception.VehicleTypeException;
 import co.com.ceiba.adn.parking.domain.model.ParkingTicket;
 import co.com.ceiba.adn.parking.domain.model.Vehicle;
+import co.com.ceiba.adn.parking.domain.model.VehicleType;
 import co.com.ceiba.adn.parking.domain.repository.TicketRepository;
 import co.com.ceiba.adn.parking.domain.repository.VehicleRepository;
 import co.com.ceiba.adn.parking.domain.repository.VehicleTypeRepository;
@@ -19,27 +25,100 @@ import co.com.ceiba.adn.parking.domain.repository.VehicleTypeRepository;
 @Service
 public class TicketService {
 
+	
+	private static final String ERROR_MAX_CAPACITY = "Acceso denegado: El estacionamiento esta en su maxima capacidad";
+	private static final String ERROR_VEHICLE_TYPE = "Tipo de Vehiculo Incompatible";
+	private static final String INITIAL_LETER_RESTRICTION = "A";
+
 	private final TicketRepository ticketRepository;
 	private final VehicleRepository vehicleRepository;
 	private final VehicleTypeRepository vehicleTypeRepository;
 
+	
+	
 	public TicketService(final TicketRepository ticketRepository, final VehicleRepository vehicleRepository,
 			final VehicleTypeRepository vehicleTypeRepository) {
 		this.ticketRepository = ticketRepository;
 		this.vehicleTypeRepository = vehicleTypeRepository;
 		this.vehicleRepository = vehicleRepository;
 	}
-
+	
 	public void registryIn(Vehicle vehicle) {
 		Date inDateTime = new Date();
+		if (vehicleRepository.countByLicensePlate(vehicle.getLicensePlate()) >= 1) {
+			vehicle = vehicleRepository.findVehicleByLicensePlate(vehicle.getLicensePlate());
+		} else {
+			vehicleRepository.save(vehicle);
+		}
 		ParkingTicket ticket = new ParkingTicket();
 		ticket.setInTimeDate(inDateTime);
-		ticket.setVehicle(vehicle);
-		vehicleTypeRepository.findByVehicleTypeId(vehicle.getVehicleType());
-		vehicleRepository.save(vehicle);
-		this.save(ticket);
+		if(this.validateParkinPlaces(vehicle.getVehicleType()) && authorizeVehicleIn(ticket,vehicle)) {
+			
+			ticket.setVehicle(vehicle);
+			this.save(ticket);
+		}
+		
 	}
 
+	public ParkingTicket registryOut(String lisencePlate) {
+		Vehicle vehicle = vehicleRepository.findVehicleByLicensePlate(lisencePlate);
+		
+		ParkingTicket ticket = findByVehicle(vehicle);
+		if (ticket != null) {
+			ticket.setOutTimeDate(new Date());
+			ticket.setGrossTotal(calculateTotalParking(ticket.getInTimeDate(), ticket.getOutTimeDate(),
+					vehicleTypeRepository.findByVehicleTypeId(vehicle.getVehicleType()), vehicle));
+			return ticket;
+		}
+		return ticket;
+	}
+
+	public ParkingTicket findByVehicle(Vehicle vehicle) {
+		List<ParkingTicket> tickets = ticketRepository.findAll();
+		for (ParkingTicket ticket : tickets) {
+			if (vehicle.getLicensePlate().equalsIgnoreCase(ticket.getVehicle().getLicensePlate())) {
+				return ticket;
+			}
+		}
+		return null;
+
+	}
+
+	public long calculateTotalParking(Date inDateTime, Date outDateTime, VehicleType type, Vehicle vehicle) {
+		long cost = 0;
+
+		long serviceTime = TimeUnit.MILLISECONDS.toHours((outDateTime.getTime() - inDateTime.getTime()));
+
+		while (serviceTime >= 24) {
+			cost += type.getDayValue();
+			serviceTime -= 24;
+
+		}
+		cost += (serviceTime >= 9 ? type.getHourValue() : type.getHourValue() * serviceTime)
+				+ type.getDisplacementCost();
+
+		{
+
+		}
+		return cost;
+	}
+
+	public boolean validateParkinPlaces(int vechileTypeId) {
+		switch (vechileTypeId) {
+		case 1:
+		case 2:
+			if (vehicleTypeRepository.findByVehicleTypeId(vechileTypeId).getSpaceAviable()<1) {
+				throw new ParkingException(ERROR_MAX_CAPACITY);
+			}
+			break;
+
+		default:
+			throw new VehicleTypeException(ERROR_VEHICLE_TYPE);
+		}
+
+		return true;
+	}
+	
 	/**
 	 * Access to save ticket
 	 * 
@@ -57,6 +136,29 @@ public class TicketService {
 	 */
 	public List<ParkingTicket> findAllTickets() {
 		return ticketRepository.findAll();
+	}
+	
+	
+	public boolean validateLicensePlate(String licensePlate) {
+		return licensePlate.toUpperCase().startsWith(INITIAL_LETER_RESTRICTION);
+	}
+
+	public boolean authorizeVehicleIn(ParkingTicket ticketParking, Vehicle vehicle) {
+
+		return (validateLicensePlate(vehicle.getLicensePlate())
+				&& validateVehicleInDate(ticketParking));
+
+	}
+
+	public boolean validateVehicleInDate(ParkingTicket parkingTicket) {
+		
+		Calendar calInt = Calendar.getInstance();
+		Calendar calOut = Calendar.getInstance();
+		calInt.setTime(parkingTicket.getInTimeDate());
+		calOut.setTime(parkingTicket.getInTimeDate());
+		return (Objects.equals((calInt.get(Calendar.DAY_OF_WEEK)),Calendar.SUNDAY)
+				|| Objects.equals((calInt.get(Calendar.DAY_OF_WEEK)),Calendar.MONDAY));
+
 	}
 
 }
