@@ -43,7 +43,7 @@ public class VehicleImplementation implements VehicleRepository{
 
 	@Override
 	public int countByLicensePlate(String licensePlate) {
-		return vehicleRepositoryJPA.CountByLisencePlate(licensePlate);
+		return vehicleRepositoryJPA.countByLicensePlate(licensePlate);
 	}
 
 }
