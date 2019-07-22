@@ -28,6 +28,7 @@ public class ParkingTicketController {
 
 	@PostMapping("/invehicle")
 	public ResponseEntity<ParkingTicket> ingresarVehiculoEstacionamiento(@RequestBody Vehicle vehicle) {
+		ticketService.registryIn(vehicle);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
@@ -35,4 +36,7 @@ public class ParkingTicketController {
 	public ResponseEntity<ParkingTicket> extraerVehiculoEstacionamiento(@PathVariable("licenceplate") String licenceplate) {
 		return new ResponseEntity<>(ticketService.registryOut(licenceplate), HttpStatus.CREATED);
 	}
+	
+	
+
 }

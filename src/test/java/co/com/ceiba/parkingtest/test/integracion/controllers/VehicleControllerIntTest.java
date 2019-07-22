@@ -71,4 +71,6 @@ public class VehicleControllerIntTest {
 	public void vehicleByLicencePlate() throws Exception {
 		mockMvc.perform(get("/api/vehicle/" + LISENCE_PLATE).contentType(MediaType.APPLICATION_JSON_UTF8)).andDo(print()).andExpect(status().isOk());
 	}
+	
+	
 }

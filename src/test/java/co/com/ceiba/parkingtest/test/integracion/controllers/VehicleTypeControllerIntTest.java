@@ -1,10 +1,9 @@
 package co.com.ceiba.parkingtest.test.integracion.controllers;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.text.ParseException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +16,6 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,9 +24,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import co.com.ceiba.adn.parking.ParkingApplication;
-import co.com.ceiba.adn.parking.domain.model.Vehicle;
 import co.com.ceiba.adn.parking.domain.model.VehicleType;
-import co.com.ceiba.parkingtest.test.unitaria.databuilder.VehicleDataBuilder;
 import co.com.ceiba.parkingtest.test.unitaria.databuilder.VehicleTypeDataBuilder;
 
 @RunWith(SpringRunner.class)
@@ -66,9 +62,14 @@ public class VehicleTypeControllerIntTest {
 
 	@Test
 	public void saveType() throws Exception {
-		String tipoJson = objectWriter.writeValueAsString(type);
-		mockMvc.perform(post("/api/type").contentType(MediaType.APPLICATION_JSON_UTF8).content(tipoJson)).andDo(print())
+		String TypeJson = objectWriter.writeValueAsString(type);
+		mockMvc.perform(post("/api/type").contentType(MediaType.APPLICATION_JSON_UTF8).content(TypeJson)).andDo(print())
 				.andExpect(status().isCreated());
+	}
+	
+	@Test
+	public void vehicleByLicencePlate() throws Exception {
+		mockMvc.perform(get("/api/type").contentType(MediaType.APPLICATION_JSON_UTF8)).andDo(print()).andExpect(status().isOk());
 	}
 
 	
