@@ -8,24 +8,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.com.ceiba.adn.parking.application.service.VehicleTypeService;
 import co.com.ceiba.adn.parking.domain.model.VehicleType;
-import co.com.ceiba.adn.parking.domain.repository.VehicleTypeRepository;
+import io.swagger.annotations.Api;
 
 @RestController
 @RequestMapping("/api/type")
+@Api(tags="type")
 public class VehicleTypeController {
 
 	@Autowired
-	private VehicleTypeRepository vehicleTypeRapository;
-
+	private VehicleTypeService service;
 	
 	@PostMapping
-	public ResponseEntity<VehicleType> toRegisterVehicle(@RequestBody VehicleType type){
-		vehicleTypeRapository.save(type);
+	public ResponseEntity<VehicleType> guardarTipo(@RequestBody VehicleType type) {
+		service.save(type);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
-	
-	
-
 
 }

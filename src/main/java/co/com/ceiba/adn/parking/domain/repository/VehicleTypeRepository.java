@@ -17,8 +17,6 @@ public interface VehicleTypeRepository {
 
 	List<VehicleType> getVehicleTypes();
 
-	VehicleType save(VehicleType type);
-
 	VehicleType findByVehicleTypeId(int vehicleTypeId);
 	
 	

@@ -1,2 +1,3 @@
 insert into vehicle_type_entity (id_vehicle_type, day_value,type_description,extra_cost,hour_value,parking_space,space_aviable) values(1,4000,'moto',2000,500,10,10);
 insert into vehicle_type_entity (id_vehicle_type, day_value,type_description,extra_cost,hour_value,parking_space,space_aviable) values(2,8000,'carro',0,1000,20,20);
+insert into vehicle_entity (license_plate,displacement,vehicle_type_id) values('RQR45A',200,2);

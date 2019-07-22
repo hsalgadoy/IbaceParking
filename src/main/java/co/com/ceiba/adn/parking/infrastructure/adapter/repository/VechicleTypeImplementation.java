@@ -16,42 +16,44 @@ import co.com.ceiba.adn.parking.infrastructure.adapter.repository.jpa.VehicleTyp
 public class VechicleTypeImplementation implements VehicleTypeRepository {
  
 	@Autowired
-	private VehicleTypeRepositoryJpa vehicleTypeRapository;
+	private VehicleTypeRepositoryJpa vehicleTypeRepository;
 
 	@Override
 	public void putAviablePlacesByType(int idVehicleType, int places) {
-		VehicleType vehicleType = VehicleTypeMapper.entityToDomain(vehicleTypeRapository.findByIdVehicleType(idVehicleType));
+		VehicleType vehicleType = VehicleTypeMapper.entityToDomain(vehicleTypeRepository.findByIdVehicleType(idVehicleType));
 		vehicleType.setSpaceAviable(places);
-		vehicleTypeRapository.save(vehicleType);
+		saveVehicleType(vehicleType);
 
 	}
 
 	@Override
 	public int obtainAviablePlacesBytType(int idVehicleType) {
-		return vehicleTypeRapository.findByIdVehicleType(idVehicleType).getSpaceAviable();
+		return vehicleTypeRepository.findByIdVehicleType(idVehicleType).getSpaceAviable();
 	}
 
-	@Override
-	public void saveVehicleType(VehicleType vehicleType) {
-		vehicleTypeRapository.save(vehicleType);
-	}
 
 	@Override
 	public ArrayList<VehicleType> getVehicleTypes() {
 		List<VehicleType> types = new ArrayList<>();
-		for (VehicleTypeEntity vehicleType : vehicleTypeRapository.findAll()) {
+		for (VehicleTypeEntity vehicleType : vehicleTypeRepository.findAll()) {
 			types.add(VehicleTypeMapper.entityToDomain(vehicleType));
 		}
 		return new ArrayList<>(types);
 	}
 
-	@Override
-	public VehicleType save(VehicleType type) {
-		return vehicleTypeRapository.save(type);
-	}
 
 	@Override
 	public VehicleType findByVehicleTypeId(int idVehicleType) {
-		return VehicleTypeMapper.entityToDomain(vehicleTypeRapository.findByIdVehicleType(idVehicleType));
+		return VehicleTypeMapper.entityToDomain(vehicleTypeRepository.findByIdVehicleType(idVehicleType));
 	}
+
+	@Override
+	public void saveVehicleType(VehicleType vehicleType) {
+		vehicleTypeRepository.save(VehicleTypeMapper.domainToEntity(vehicleType));
+		
+	}
+
+	
+
+	
 }

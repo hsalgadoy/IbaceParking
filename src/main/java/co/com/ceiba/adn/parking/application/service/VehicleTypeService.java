@@ -25,8 +25,8 @@ public class VehicleTypeService {
 	 * @param ticket object ticket to be saved
 	 * @return return ticked to save as a saved ticked
 	 */
-	public VehicleType save(VehicleType type) {
-		return vehicleTypeRepository.save(type);
+	public void save(VehicleType type) {
+		 vehicleTypeRepository.saveVehicleType(type);
 	}
 	/**
 	 * get a list of all tickets at parking

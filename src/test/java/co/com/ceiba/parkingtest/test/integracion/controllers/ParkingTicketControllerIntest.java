@@ -1,9 +1,11 @@
 package co.com.ceiba.parkingtest.test.integracion.controllers;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.text.ParseException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,6 +34,41 @@ import co.com.ceiba.parkingtest.test.unitaria.databuilder.VehicleDataBuilder;
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application-test.yaml")
 public class ParkingTicketControllerIntest {
-	
+
+	private static final String LICENCE_PLATE = "RQR45A";
+
+	@Autowired
+	private WebApplicationContext context;
+
+	private MockMvc mockMvc;
+
+	private Vehicle vehicle;
+	private ObjectWriter objectWriter;
+
+	@Before
+	public void setUp() throws ParseException {
+		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+		VehicleDataBuilder vehicleBuilder = new VehicleDataBuilder().withVehicleType(2);
+		vehicle = vehicleBuilder.build();
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.registerModule(new JavaTimeModule());
+		objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+		objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+		objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
+	}
+
+	@Test
+	public void saveVehicleOut() throws Exception {
+		mockMvc.perform(patch("/api/parking/outvehicle/" + LICENCE_PLATE).contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(status().isCreated());
+	}
+
+	@Test
+	public void saveVehicleIn() throws Exception {
+		String vehiculoJson = objectWriter.writeValueAsString(vehicle);
+		mockMvc.perform(
+				post("/api/parking/invehicle").contentType(MediaType.APPLICATION_JSON_UTF8).content(vehiculoJson))
+				.andDo(print()).andExpect(status().isCreated());
+	}
 
 }

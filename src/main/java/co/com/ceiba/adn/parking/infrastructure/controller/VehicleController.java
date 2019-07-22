@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.com.ceiba.adn.parking.application.service.VehicleService;
 import co.com.ceiba.adn.parking.domain.model.Vehicle;
+import io.swagger.annotations.Api;
 
 @RestController
 @RequestMapping("/api/vehicle")
+@Api(tags = "vehicle")
 public class VehicleController {
 
 	@Autowired
@@ -26,8 +28,8 @@ public class VehicleController {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
-	@GetMapping("/VehicleLisencePlate")
-	public ResponseEntity<Vehicle> get(@PathVariable("VehicleLisencePlate") String vehicleLisencePlate) {
+	@GetMapping("/{licenceplate}")
+	public ResponseEntity<Vehicle> get(@PathVariable("licenceplate") String vehicleLisencePlate) {
 		return new ResponseEntity<> (vehicleService.ObtainVehicleByLicensePlate(vehicleLisencePlate),HttpStatus.OK);
 	}
 }
