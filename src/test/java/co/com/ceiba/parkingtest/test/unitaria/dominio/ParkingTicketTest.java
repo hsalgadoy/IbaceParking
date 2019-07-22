@@ -19,19 +19,21 @@ import co.com.ceiba.parkingtest.test.unitaria.databuilder.VehicleDataBuilder;
 import co.com.ceiba.parkingtest.test.unitaria.databuilder.VehicleTypeDataBuilder;
 
 public class ParkingTicketTest {
-
+	
+	
 	private static final int TICKET_NUM = 1;
 	private static final String IN_DATE = "10/06/2019 07:00:00";
 	private static final String OUT_DATE = "10/06/2019 20:00:00";
+	private static final String MONDAY_DATE="22/07/2019 20:00:00";
 	private static final Vehicle VEHICLE_T = new VehicleDataBuilder().build();
 	private static final VehicleType VEHICLE_TYPE = new VehicleTypeDataBuilder().build();
 	private static final double TOTAL_TICKET = 6000;
-
+	public final SimpleDateFormat formato = new SimpleDateFormat("dd/mm/yyyy hh:mm:ss");
 	private ParkingTicket parkingTicket;
 	
 	@Autowired
 	private TicketService service = new  TicketService();
-	public final SimpleDateFormat formato = new SimpleDateFormat("dd/mm/yyyy hh:mm:ss");
+	
 
 	@Before
 	public void setUp() throws ParseException {
@@ -61,6 +63,12 @@ public class ParkingTicketTest {
 	public void testService() throws ParseException {
 		service.calculateTotalParking(formato.parse(IN_DATE),formato.parse(OUT_DATE),VEHICLE_TYPE);
 		
+	}
+	
+	@Test
+	public void testInDate() throws ParseException {
+		parkingTicket.setInTimeDate(formato.parse(MONDAY_DATE));
+		service.validateVehicleInDate(parkingTicket);
 	}
 
 }
