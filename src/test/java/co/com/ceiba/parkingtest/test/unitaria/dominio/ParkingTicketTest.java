@@ -71,4 +71,6 @@ public class ParkingTicketTest {
 		service.validateVehicleInDate(parkingTicket);
 	}
 
+
+	
 }

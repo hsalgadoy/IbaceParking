@@ -18,7 +18,7 @@ public interface ParkingTicketRepositoryJPA extends JpaRepository<ParkingTicketE
 
 	public List<ParkingTicketEntity> findAll();
 
-	void save(ParkingTicket parkingTicket);
+	ParkingTicketEntity save(ParkingTicketEntity parkingTicket);
 
 	public ParkingTicketEntity findByTicketNumber(int ticketNumber);
 

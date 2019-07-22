@@ -14,9 +14,11 @@ import co.com.ceiba.adn.parking.domain.exception.VehicleTypeException;
 import co.com.ceiba.adn.parking.domain.model.ParkingTicket;
 import co.com.ceiba.adn.parking.domain.model.Vehicle;
 import co.com.ceiba.adn.parking.domain.model.VehicleType;
-import co.com.ceiba.adn.parking.domain.repository.TicketRepository;
 import co.com.ceiba.adn.parking.domain.repository.VehicleRepository;
 import co.com.ceiba.adn.parking.domain.repository.VehicleTypeRepository;
+import co.com.ceiba.adn.parking.infrastructure.adapter.entity.ParkingTicketEntity;
+import co.com.ceiba.adn.parking.infrastructure.adapter.mapper.ParkingTicketMapper;
+import co.com.ceiba.adn.parking.infrastructure.adapter.repository.jpa.ParkingTicketRepositoryJPA;
 
 /**
  * 
@@ -32,20 +34,12 @@ public class TicketService {
 	private static final String INITIAL_LETER_RESTRICTION = "A";
 	
 	@Autowired
-	private  TicketRepository ticketRepository;
+	private  ParkingTicketRepositoryJPA ticketRepository;
 	@Autowired
 	private  VehicleRepository vehicleRepository;
 	@Autowired
 	private VehicleTypeRepository vehicleTypeRepository;
 
-	
-	
-//	public TicketService(final TicketRepository ticketRepository, final VehicleRepository vehicleRepository,
-//			final VehicleTypeRepository vehicleTypeRepository) {
-//		this.ticketRepository = ticketRepository;
-//		this.vehicleTypeRepository = vehicleTypeRepository;
-//		this.vehicleRepository = vehicleRepository;
-//	}
 	
 	public void registryIn(Vehicle vehicle) {
 		Date inDateTime = new Date();
@@ -78,10 +72,10 @@ public class TicketService {
 	}
 
 	public ParkingTicket findByVehicle(Vehicle vehicle) {
-		List<ParkingTicket> tickets = ticketRepository.findAll();
-		for (ParkingTicket ticket : tickets) {
+		List<ParkingTicketEntity> tickets = ticketRepository.findAll();
+		for (ParkingTicketEntity ticket : tickets) {
 			if (vehicle.getLicensePlate().equalsIgnoreCase(ticket.getVehicle().getLicensePlate())) {
-				return ticket;
+				return ParkingTicketMapper.toDomain(ticket);
 			}
 		}
 		return null;
@@ -126,7 +120,7 @@ public class TicketService {
 	 * @return return ticked to save as a saved ticked
 	 */
 	public void save(ParkingTicket ticket) {
-		ticketRepository.save(ticket);
+		ticketRepository.save(ParkingTicketMapper.toEntity(ticket));
 	}
 
 	/**
@@ -134,7 +128,7 @@ public class TicketService {
 	 * 
 	 * @return list of tickets
 	 */
-	public List<ParkingTicket> findAllTickets() {
+	public List<ParkingTicketEntity> findAllTickets() {
 		return ticketRepository.findAll();
 	}
 	

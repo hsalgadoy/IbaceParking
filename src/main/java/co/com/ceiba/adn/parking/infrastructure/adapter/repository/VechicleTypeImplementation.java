@@ -52,6 +52,8 @@ public class VechicleTypeImplementation implements VehicleTypeRepository {
 		vehicleTypeRepository.save(VehicleTypeMapper.domainToEntity(vehicleType));
 		
 	}
+	
+	
 
 	
 
