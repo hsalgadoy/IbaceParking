@@ -21,7 +21,7 @@ public final class ArgumentValidator {
 	}
 
 	public static void greaterThanZeroValidation(int value, String warningMesage) {
-		if (value > 0)
+		if (value < 0)
 			throw new ParkingException(warningMesage);
 
 	}

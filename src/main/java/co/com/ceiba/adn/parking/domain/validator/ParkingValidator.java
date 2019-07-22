@@ -35,7 +35,7 @@ public final class ParkingValidator {
 	 * @param message  exception message to be displayed
 	 */
 	public static void checkInByLicensePlateValidation(String licensePlate, LocalDateTime entryDate, String message) {
-		if (licensePlate.startsWith(RESTRICTED_PLATE_FILTER) && !(entryDate.getDayOfWeek().equals(DayOfWeek.SUNDAY)
+		if (licensePlate.startsWith(RESTRICTED_PLATE_FILTER) && (entryDate.getDayOfWeek().equals(DayOfWeek.SUNDAY)
 				|| entryDate.getDayOfWeek().equals(DayOfWeek.MONDAY))) {
 			throw new ParkingException(message);
 		}
