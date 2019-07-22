@@ -13,14 +13,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,7 +28,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import co.com.ceiba.adn.parking.ParkingApplication;
 import co.com.ceiba.adn.parking.application.service.TicketService;
 import co.com.ceiba.adn.parking.application.service.VehicleTypeService;
-import co.com.ceiba.adn.parking.domain.model.ParkingTicket;
 import co.com.ceiba.adn.parking.domain.model.Vehicle;
 import co.com.ceiba.parkingtest.test.unitaria.databuilder.VehicleDataBuilder;
 
