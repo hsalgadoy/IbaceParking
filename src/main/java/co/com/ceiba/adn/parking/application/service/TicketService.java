@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.com.ceiba.adn.parking.domain.exception.ParkingException;
@@ -29,19 +30,22 @@ public class TicketService {
 	private static final String ERROR_MAX_CAPACITY = "Acceso denegado: El estacionamiento esta en su maxima capacidad";
 	private static final String ERROR_VEHICLE_TYPE = "Tipo de Vehiculo Incompatible";
 	private static final String INITIAL_LETER_RESTRICTION = "A";
-
-	private final TicketRepository ticketRepository;
-	private final VehicleRepository vehicleRepository;
-	private final VehicleTypeRepository vehicleTypeRepository;
+	
+	@Autowired
+	private  TicketRepository ticketRepository;
+	@Autowired
+	private  VehicleRepository vehicleRepository;
+	@Autowired
+	private VehicleTypeRepository vehicleTypeRepository;
 
 	
 	
-	public TicketService(final TicketRepository ticketRepository, final VehicleRepository vehicleRepository,
-			final VehicleTypeRepository vehicleTypeRepository) {
-		this.ticketRepository = ticketRepository;
-		this.vehicleTypeRepository = vehicleTypeRepository;
-		this.vehicleRepository = vehicleRepository;
-	}
+//	public TicketService(final TicketRepository ticketRepository, final VehicleRepository vehicleRepository,
+//			final VehicleTypeRepository vehicleTypeRepository) {
+//		this.ticketRepository = ticketRepository;
+//		this.vehicleTypeRepository = vehicleTypeRepository;
+//		this.vehicleRepository = vehicleRepository;
+//	}
 	
 	public void registryIn(Vehicle vehicle) {
 		Date inDateTime = new Date();
