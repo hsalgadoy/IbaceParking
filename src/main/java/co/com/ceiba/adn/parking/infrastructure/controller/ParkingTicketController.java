@@ -2,6 +2,7 @@ package co.com.ceiba.adn.parking.infrastructure.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +15,7 @@ import co.com.ceiba.adn.parking.domain.model.ParkingTicket;
 import co.com.ceiba.adn.parking.domain.model.Vehicle;
 import io.swagger.annotations.Api;
 
-
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/api/parking")
 @Api(tags = "parking")
