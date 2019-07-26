@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.com.ceiba.adn.parking.domain.model.Vehicle;
-import co.com.ceiba.adn.parking.domain.repository.VehicleRepository;
+import co.com.ceiba.adn.parking.infrastructure.adapter.repository.VehicleImplementation;
 
 /**
  * 
@@ -15,34 +15,38 @@ import co.com.ceiba.adn.parking.domain.repository.VehicleRepository;
  */
 
 @Service
-public class VehicleService {
-	
+public class VehicleService  {
+
 	@Autowired
-	private VehicleRepository vehicleRepository ;
-	
+	private VehicleImplementation vehicleImplementation;
+
 	/**
 	 * return the list of all vehicles into parking
+	 * 
 	 * @return
 	 */
 	public List<Vehicle> findAllVehicles() {
-		return vehicleRepository.findAll();
+		return vehicleImplementation.findAll();
 	}
 	
 	/**
 	 * return the vehicle sent to save as a saved
+	 * 
 	 * @param vehicle
 	 */
-	public void saveVehicle(Vehicle vehicle) {
-		vehicleRepository.save(vehicle);
+	public Vehicle saveVehicle(Vehicle vehicle) {
+		
+		return vehicleImplementation.save(vehicle);
 	}
-	
+
 	/**
 	 * Obtain the vehicle searching by the licensePlate
+	 * 
 	 * @param licensePlate the license plate as a string
-	 * @return vehicle 
+	 * @return vehicle
 	 */
 	public Vehicle ObtainVehicleByLicensePlate(String licensePlate) {
-		return vehicleRepository.findVehicleByLicensePlate(licensePlate);
+		return vehicleImplementation.findVehicleByLicensePlate(licensePlate);
 	}
 
 }

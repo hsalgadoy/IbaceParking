@@ -63,7 +63,7 @@ public class VehicleControllerIntTest {
 	@Test
 	public void saveVehicle() throws Exception{
 		String vehicleJson = objectWriter.writeValueAsString(vechile);
-		mockMvc.perform(post("/api/vehicle").contentType(MediaType.APPLICATION_JSON_UTF8).content(vehicleJson))
+		mockMvc.perform(post("/api/vehicle/entry").contentType(MediaType.APPLICATION_JSON_UTF8).content(vehicleJson))
 		.andDo(print()).andExpect(status().isCreated());
 	}
 	

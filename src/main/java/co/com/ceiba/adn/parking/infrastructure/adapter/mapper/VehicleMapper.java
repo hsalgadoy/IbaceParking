@@ -29,6 +29,7 @@ public final class VehicleMapper {
 		vehicleEntity.setDisplacement(domain.getDisplacement());
 		
 		vehicleEntity.setLicensePlate(domain.getLicensePlate());
+		
 
 		vehicleEntity.setVehicleType(domain.getVehicleType());
 

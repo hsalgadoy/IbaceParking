@@ -1,5 +1,7 @@
 package co.com.ceiba.adn.parking.infrastructure.adapter.repository.jpa;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -19,5 +21,7 @@ public interface VehicleRepositoryJPA extends CrudRepository<VehicleEntity, Stri
 	VehicleEntity findVehicleByLicensePlate(String licensePlate);
 	
 	int countByLicensePlate(String licensePlate);
+	
+	List<VehicleEntity> findAll();
 
 }

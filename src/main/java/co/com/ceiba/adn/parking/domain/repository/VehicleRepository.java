@@ -8,7 +8,7 @@ import co.com.ceiba.adn.parking.domain.model.Vehicle;
 @Repository
 public interface VehicleRepository  {
 
-	void save(Vehicle vehicle);
+	Vehicle save(Vehicle vehicle);
 	
 	Vehicle findVehicleByLicensePlate(String licensePlate);
 	
