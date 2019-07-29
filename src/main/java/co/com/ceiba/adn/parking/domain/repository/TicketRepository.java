@@ -10,7 +10,7 @@ public interface TicketRepository {
 
 	List<ParkingTicket> findAll();
 	ParkingTicket findByTicketNumber(int ticketnumber);
-	void save(ParkingTicket parkingTicket);
+	ParkingTicket save(ParkingTicket parkingTicket);
 
 	
 	

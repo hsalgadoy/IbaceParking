@@ -1,8 +1,8 @@
 package co.com.ceiba.adn.parking.infrastructure.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,5 +33,10 @@ public class VehicleController {
 	@GetMapping("/get/{licenceplate}")
 	public Vehicle get(@PathVariable("licenceplate") String vehicleLisencePlate) {
 		return vehicleService.ObtainVehicleByLicensePlate(vehicleLisencePlate);
+	}
+	
+	@GetMapping("/list")
+	public List<Vehicle> vehicles() {
+		return vehicleService.findAllVehicles();
 	}
 }

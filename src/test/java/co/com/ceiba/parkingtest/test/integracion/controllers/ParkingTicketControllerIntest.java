@@ -74,7 +74,7 @@ public class ParkingTicketControllerIntest {
 		String vehiculoJson = objectWriter.writeValueAsString(vehicle);
 		mockMvc.perform(
 				post("/api/parking/invehicle").contentType(MediaType.APPLICATION_JSON_UTF8).content(vehiculoJson))
-				.andDo(print()).andExpect(status().isCreated());
+				.andDo(print()).andExpect(status().isOk());
 	}
 	
 	public void listVehicles() throws Exception{

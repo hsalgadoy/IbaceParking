@@ -1,6 +1,5 @@
 package co.com.ceiba.adn.parking.application.service;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -17,9 +16,7 @@ import co.com.ceiba.adn.parking.domain.model.Vehicle;
 import co.com.ceiba.adn.parking.domain.model.VehicleType;
 import co.com.ceiba.adn.parking.domain.repository.VehicleRepository;
 import co.com.ceiba.adn.parking.domain.repository.VehicleTypeRepository;
-import co.com.ceiba.adn.parking.infrastructure.adapter.entity.ParkingTicketEntity;
-import co.com.ceiba.adn.parking.infrastructure.adapter.mapper.ParkingTicketMapper;
-import co.com.ceiba.adn.parking.infrastructure.adapter.repository.jpa.ParkingTicketRepositoryJPA;
+import co.com.ceiba.adn.parking.infrastructure.adapter.repository.TicketImplementation;
 
 /**
  * 
@@ -35,26 +32,32 @@ public class TicketService {
 	private static final String INITIAL_LETER_RESTRICTION = "A";
 	
 	@Autowired
-	private  ParkingTicketRepositoryJPA ticketRepository;
+	private  TicketImplementation ticketImplementation;
 	@Autowired
 	private  VehicleRepository vehicleRepository;
 	@Autowired
 	private VehicleTypeRepository vehicleTypeRepository;
 
 	
-	public void registryIn(Vehicle vehicle) {
+	public ParkingTicket registryIn(Vehicle vehicle) {
 		Date inDateTime = new Date();
 		if (vehicleRepository.countByLicensePlate(vehicle.getLicensePlate()) >= 1) {
 			vehicle = vehicleRepository.findVehicleByLicensePlate(vehicle.getLicensePlate());
+			System.out.println("buscado");
+
 		} else {
+			System.out.println("creado");
+
 			vehicleRepository.save(vehicle);
 		}
 		ParkingTicket ticket = new ParkingTicket();
 		ticket.setInTimeDate(inDateTime);
 		if(this.validateParkinPlaces(vehicle.getVehicleType()) && authorizeVehicleIn(ticket,vehicle)) {
-			
 			ticket.setVehicle(vehicle);
-			this.save(ticket);
+			return ticketImplementation.save(ticket);
+		}else {
+			
+			return new ParkingTicket();
 		}
 		
 	}
@@ -73,10 +76,10 @@ public class TicketService {
 	}
 
 	public ParkingTicket findByVehicle(Vehicle vehicle) {
-		List<ParkingTicketEntity> tickets = ticketRepository.findAll();
-		for (ParkingTicketEntity ticket : tickets) {
+		List<ParkingTicket> tickets = ticketImplementation.findAll();
+		for (ParkingTicket ticket : tickets) {
 			if (vehicle.getLicensePlate().equalsIgnoreCase(ticket.getVehicle().getLicensePlate())) {
-				return ParkingTicketMapper.toDomain(ticket);
+				return ticket;
 			}
 		}
 		return null;
@@ -120,8 +123,8 @@ public class TicketService {
 	 * @param ticket object ticket to be saved
 	 * @return return ticked to save as a saved ticked
 	 */
-	public void save(ParkingTicket ticket) {
-		ticketRepository.save(ParkingTicketMapper.toEntity(ticket));
+	public ParkingTicket save(ParkingTicket ticket) {
+		return ticketImplementation.save(ticket);
 	}
 
 	/**
@@ -130,28 +133,24 @@ public class TicketService {
 	 * @return list of tickets
 	 */
 	public List<ParkingTicket> findAllTickets() {
-		List<ParkingTicketEntity> entities = ticketRepository.findAll();
-		List<ParkingTicket> models = new ArrayList<>();
-		for(ParkingTicketEntity entity: entities) {
-			models.add(ParkingTicketMapper.toDomain(entity));
-		}
-		return models;
+		return ticketImplementation.findAll();
+		
 	}
 	
 	
 	public boolean validateLicensePlate(String licensePlate) {
-		return licensePlate.toUpperCase().startsWith(INITIAL_LETER_RESTRICTION);
+		
+		return !licensePlate.toUpperCase().startsWith(INITIAL_LETER_RESTRICTION);
 	}
 
 	public boolean authorizeVehicleIn(ParkingTicket ticketParking, Vehicle vehicle) {
-
 		return (validateLicensePlate(vehicle.getLicensePlate())
 				&& validateVehicleInDate(ticketParking));
 
 	}
 
 	public boolean validateVehicleInDate(ParkingTicket parkingTicket) {
-		
+	
 		Calendar calInt = Calendar.getInstance();
 		Calendar calOut = Calendar.getInstance();
 		calInt.setTime(parkingTicket.getInTimeDate());

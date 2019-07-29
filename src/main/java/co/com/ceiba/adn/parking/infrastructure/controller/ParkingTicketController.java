@@ -31,9 +31,9 @@ public class ParkingTicketController {
 	}
 
 	@PostMapping("/invehicle")
-	public ResponseEntity<ParkingTicket> etryVehiclesParking(@RequestBody Vehicle vehicle) {
-		ticketService.registryIn(vehicle);
-		return new ResponseEntity<>(HttpStatus.CREATED);
+	public ParkingTicket entryVehiclesParking(@RequestBody Vehicle vehicle) {
+		return ticketService.registryIn(vehicle);
+//		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 	@PatchMapping("/outvehicle/{licenceplate}")

@@ -41,8 +41,8 @@ public class TicketImplementation implements TicketRepository{
 	}
 
 	@Override
-	public void save(ParkingTicket parkingTicket) {
-		ticketRepositoryJPA.save(ParkingTicketMapper.toEntity(parkingTicket));
+	public ParkingTicket save(ParkingTicket parkingTicket) {
+		return ParkingTicketMapper.toDomain(ticketRepositoryJPA.save(ParkingTicketMapper.toEntity(parkingTicket)));
 	}
 
 	
