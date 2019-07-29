@@ -2,6 +2,7 @@ package co.com.ceiba.parkingtest.test.integracion.controllers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -74,6 +75,10 @@ public class ParkingTicketControllerIntest {
 		mockMvc.perform(
 				post("/api/parking/invehicle").contentType(MediaType.APPLICATION_JSON_UTF8).content(vehiculoJson))
 				.andDo(print()).andExpect(status().isCreated());
+	}
+	
+	public void listVehicles() throws Exception{
+		mockMvc.perform(get("/api/parking/list").contentType(MediaType.APPLICATION_JSON_UTF8)).andExpect(status().isOk());
 	}
 
 	

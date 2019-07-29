@@ -1,8 +1,11 @@
 package co.com.ceiba.adn.parking.infrastructure.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,16 +31,19 @@ public class ParkingTicketController {
 	}
 
 	@PostMapping("/invehicle")
-	public ResponseEntity<ParkingTicket> ingresarVehiculoEstacionamiento(@RequestBody Vehicle vehicle) {
+	public ResponseEntity<ParkingTicket> etryVehiclesParking(@RequestBody Vehicle vehicle) {
 		ticketService.registryIn(vehicle);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 	@PatchMapping("/outvehicle/{licenceplate}")
-	public ResponseEntity<ParkingTicket> extraerVehiculoEstacionamiento(@PathVariable("licenceplate") String licenceplate) {
+	public ResponseEntity<ParkingTicket> extracVehicleParking(@PathVariable("licenceplate") String licenceplate) {
 		return new ResponseEntity<>(ticketService.registryOut(licenceplate), HttpStatus.CREATED);
 	}
 	
-	
+	@GetMapping("/list")
+	public List<ParkingTicket>	listParking(){
+		return ticketService.findAllTickets();
+	}
 
 }

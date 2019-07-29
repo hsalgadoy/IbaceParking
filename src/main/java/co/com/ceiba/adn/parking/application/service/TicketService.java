@@ -1,5 +1,6 @@
 package co.com.ceiba.adn.parking.application.service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -128,8 +129,13 @@ public class TicketService {
 	 * 
 	 * @return list of tickets
 	 */
-	public List<ParkingTicketEntity> findAllTickets() {
-		return ticketRepository.findAll();
+	public List<ParkingTicket> findAllTickets() {
+		List<ParkingTicketEntity> entities = ticketRepository.findAll();
+		List<ParkingTicket> models = new ArrayList<>();
+		for(ParkingTicketEntity entity: entities) {
+			models.add(ParkingTicketMapper.toDomain(entity));
+		}
+		return models;
 	}
 	
 	

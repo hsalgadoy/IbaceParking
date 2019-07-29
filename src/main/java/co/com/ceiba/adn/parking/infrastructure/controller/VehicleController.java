@@ -30,8 +30,8 @@ public class VehicleController {
 
 	}
 
-	@GetMapping("/{licenceplate}")
-	public ResponseEntity<Vehicle> get(@PathVariable("licenceplate") String vehicleLisencePlate) {
-		return new ResponseEntity<> (vehicleService.ObtainVehicleByLicensePlate(vehicleLisencePlate),HttpStatus.OK);
+	@GetMapping("/get/{licenceplate}")
+	public Vehicle get(@PathVariable("licenceplate") String vehicleLisencePlate) {
+		return vehicleService.ObtainVehicleByLicensePlate(vehicleLisencePlate);
 	}
 }

@@ -6,7 +6,7 @@ public class VehicleDataBuilder {
 
 	private static final int TYPE = 1;
 	private static final long DISPLACEMENT_CC = 650;
-	private static final String LISENCE_PLATE = "FSG83D";
+	private static final String LISENCE_PLATE = "RQR45A";
 
 	private String licensePlate;
 

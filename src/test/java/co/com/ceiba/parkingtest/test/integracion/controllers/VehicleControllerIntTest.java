@@ -33,8 +33,8 @@ import co.com.ceiba.parkingtest.test.unitaria.databuilder.VehicleDataBuilder;
 @TestPropertySource(locations = "classpath:application-test.yaml")
 public class VehicleControllerIntTest {
 
-	public static final String LISENCE_PLATE="RQG72E";
-	public static final String LISENCE_PLATE_OPTIONAL="RQR45A";
+	public static final String LISENCE_PLATE="RQR45A";
+	public static final String LISENCE_PLATE_OPTIONAL="RQG72E";
 	public static final int TYPE = 1;
 	public static final long DISPLACEMENT=200;
 	
@@ -64,12 +64,12 @@ public class VehicleControllerIntTest {
 	public void saveVehicle() throws Exception{
 		String vehicleJson = objectWriter.writeValueAsString(vechile);
 		mockMvc.perform(post("/api/vehicle/entry").contentType(MediaType.APPLICATION_JSON_UTF8).content(vehicleJson))
-		.andDo(print()).andExpect(status().isCreated());
+		.andDo(print()).andExpect(status().isOk());
 	}
 	
 	@Test
 	public void vehicleByLicencePlate() throws Exception {
-		mockMvc.perform(get("/api/vehicle/" + LISENCE_PLATE).contentType(MediaType.APPLICATION_JSON_UTF8)).andDo(print()).andExpect(status().isOk());
+		mockMvc.perform(get("/api/vehicle/get/" + LISENCE_PLATE).contentType(MediaType.APPLICATION_JSON_UTF8)).andDo(print()).andExpect(status().isOk());
 	}
 	
 	
