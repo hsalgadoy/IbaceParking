@@ -36,8 +36,8 @@ public class ParkingTicketController {
 	}
 
 	@PatchMapping("/outvehicle/{licenceplate}")
-	public ResponseEntity<ParkingTicket> extracVehicleParking(@PathVariable("licenceplate") String licenceplate) {
-		return new ResponseEntity<>(ticketService.registryOut(licenceplate), HttpStatus.CREATED);
+	public ParkingTicket extracVehicleParking(@PathVariable("licenceplate") String licenceplate) {
+		return ticketService.registryOut(licenceplate);
 	}
 	
 	@GetMapping("/list")
