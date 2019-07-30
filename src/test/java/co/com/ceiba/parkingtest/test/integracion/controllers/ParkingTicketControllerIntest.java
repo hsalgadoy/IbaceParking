@@ -64,7 +64,7 @@ public class ParkingTicketControllerIntest {
 	@Test
 	public void saveVehicleOut() throws Exception {
 		mockMvc.perform(patch("/api/parking/outvehicle/" + LICENCE_PLATE).contentType(MediaType.APPLICATION_JSON_UTF8))
-				.andExpect(status().isCreated());
+				.andExpect(status().isOk());
 	}
 
 	@Test
