@@ -43,11 +43,7 @@ public class TicketService {
 		Date inDateTime = new Date();
 		if (vehicleRepository.countByLicensePlate(vehicle.getLicensePlate()) >= 1) {
 			vehicle = vehicleRepository.findVehicleByLicensePlate(vehicle.getLicensePlate());
-			System.out.println("buscado");
-
 		} else {
-			System.out.println("creado");
-
 			vehicleRepository.save(vehicle);
 		}
 		ParkingTicket ticket = new ParkingTicket();
@@ -56,8 +52,7 @@ public class TicketService {
 			ticket.setVehicle(vehicle);
 			return ticketImplementation.save(ticket);
 		}else {
-			
-			return new ParkingTicket();
+			throw new ParkingException("No se pudo Ingresar el vehiculo");
 		}
 		
 	}
@@ -140,12 +135,13 @@ public class TicketService {
 	
 	public boolean validateLicensePlate(String licensePlate) {
 		
-		return !licensePlate.toUpperCase().startsWith(INITIAL_LETER_RESTRICTION);
+		return licensePlate.toUpperCase().startsWith(INITIAL_LETER_RESTRICTION);
 	}
 
 	public boolean authorizeVehicleIn(ParkingTicket ticketParking, Vehicle vehicle) {
-		return (validateLicensePlate(vehicle.getLicensePlate())
-				&& validateVehicleInDate(ticketParking));
+
+		return ((validateLicensePlate(vehicle.getLicensePlate())
+				&& validateVehicleInDate(ticketParking))||!validateLicensePlate(vehicle.getLicensePlate()));
 
 	}
 

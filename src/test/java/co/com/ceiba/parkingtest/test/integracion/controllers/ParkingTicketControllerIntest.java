@@ -1,12 +1,10 @@
 package co.com.ceiba.parkingtest.test.integracion.controllers;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.text.ParseException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -52,7 +50,7 @@ public class ParkingTicketControllerIntest {
 	private ObjectWriter objectWriter;
 
 	@Before
-	public void setUp() throws ParseException {
+	public void setUp() {
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 		VehicleDataBuilder vehicleBuilder = new VehicleDataBuilder().withVehicleType(2);
 		vehicle = vehicleBuilder.build();

@@ -26,7 +26,7 @@ public class TicketImplementation implements TicketRepository{
 
 	@Override
 	public List<ParkingTicket> findAll() {
-		List<ParkingTicket> tickets = new ArrayList<ParkingTicket>();
+		List<ParkingTicket> tickets = new ArrayList<>();
 		for(ParkingTicketEntity ticketEntoty:ticketRepositoryJPA.findAll()) {
 			tickets.add(ParkingTicketMapper.toDomain(ticketEntoty));
 		}

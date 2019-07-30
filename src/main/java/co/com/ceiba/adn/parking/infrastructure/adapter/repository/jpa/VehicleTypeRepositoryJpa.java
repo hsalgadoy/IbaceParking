@@ -15,6 +15,7 @@ import co.com.ceiba.adn.parking.infrastructure.adapter.entity.VehicleTypeEntity;
 @Repository
 public interface VehicleTypeRepositoryJpa extends CrudRepository<VehicleTypeEntity, Integer> {
 
+	@SuppressWarnings("unchecked")
 	VehicleTypeEntity save(VehicleTypeEntity vehicleType);
 
 	VehicleTypeEntity findByIdVehicleType(int vehicleTypeId);

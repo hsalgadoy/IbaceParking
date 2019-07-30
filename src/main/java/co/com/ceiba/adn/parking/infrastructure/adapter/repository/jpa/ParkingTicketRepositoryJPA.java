@@ -17,6 +17,7 @@ public interface ParkingTicketRepositoryJPA extends JpaRepository<ParkingTicketE
 
 	public List<ParkingTicketEntity> findAll();
 
+	@SuppressWarnings("unchecked")
 	ParkingTicketEntity save(ParkingTicketEntity parkingTicket);
 
 	public ParkingTicketEntity findByTicketNumber(int ticketNumber);
