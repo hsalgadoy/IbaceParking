@@ -26,19 +26,17 @@ import co.com.ceiba.adn.parking.infrastructure.adapter.repository.TicketImplemen
 @Service
 public class TicketService {
 
-	
 	private static final String ERROR_MAX_CAPACITY = "Acceso denegado: El estacionamiento esta en su maxima capacidad";
 	private static final String ERROR_VEHICLE_TYPE = "Tipo de Vehiculo Incompatible";
 	private static final String INITIAL_LETER_RESTRICTION = "A";
-	
+
 	@Autowired
-	private  TicketImplementation ticketImplementation;
+	private TicketImplementation ticketImplementation;
 	@Autowired
-	private  VehicleRepository vehicleRepository;
+	private VehicleRepository vehicleRepository;
 	@Autowired
 	private VehicleTypeRepository vehicleTypeRepository;
 
-	
 	public ParkingTicket registryIn(Vehicle vehicle) {
 		Date inDateTime = new Date();
 		if (vehicleRepository.countByLicensePlate(vehicle.getLicensePlate()) >= 1) {
@@ -48,24 +46,28 @@ public class TicketService {
 		}
 		ParkingTicket ticket = new ParkingTicket();
 		ticket.setInTimeDate(inDateTime);
-		if(this.validateParkinPlaces(vehicle.getVehicleType()) && authorizeVehicleIn(ticket,vehicle)) {
+		if (this.validateParkinPlaces(vehicle.getVehicleType()) && authorizeVehicleIn(ticket, vehicle)) {
 			ticket.setVehicle(vehicle);
 			return ticketImplementation.save(ticket);
-		}else {
+		} else {
 			throw new ParkingException("No se pudo Ingresar el vehiculo");
 		}
-		
+
 	}
 
 	public ParkingTicket registryOut(String lisencePlate) {
 		Vehicle vehicle = vehicleRepository.findVehicleByLicensePlate(lisencePlate);
-		
+
 		ParkingTicket ticket = findByVehicle(vehicle);
 		if (ticket != null) {
 			ticket.setOutTimeDate(new Date());
 			ticket.setGrossTotal(calculateTotalParking(ticket.getInTimeDate(), ticket.getOutTimeDate(),
 					vehicleTypeRepository.findByVehicleTypeId(vehicle.getVehicleType())));
-			return ticket;
+			if(vehicle.getVehicleType()==1 && vehicle.getDisplacement()>=500) {
+				ticket.setDisplacementCost(vehicleTypeRepository.findByVehicleTypeId(vehicle.getVehicleType()).getDisplacementCost());
+				ticket.setGrossTotal(ticket.getGrossTotal()+ticket.getDisplacementCost());
+			}
+			return ticketImplementation.save(ticket);
 		}
 		return ticket;
 	}
@@ -83,7 +85,7 @@ public class TicketService {
 
 	public long calculateTotalParking(Date inDateTime, Date outDateTime, VehicleType type) {
 		long cost = 0;
-
+		
 		long serviceTime = TimeUnit.MILLISECONDS.toHours((outDateTime.getTime() - inDateTime.getTime()));
 
 		while (serviceTime >= 24) {
@@ -91,8 +93,12 @@ public class TicketService {
 			serviceTime -= 24;
 
 		}
-		cost += (serviceTime >= 9 ? type.getHourValue() : type.getHourValue() * serviceTime)
-				+ type.getDisplacementCost();
+		if (serviceTime < 1) {
+			cost += type.getHourValue();
+		} else {
+			cost += (serviceTime >= 9 ? type.getDayValue() : type.getHourValue() * serviceTime);
+					
+		}
 		return cost;
 	}
 
@@ -100,7 +106,7 @@ public class TicketService {
 		switch (vechileTypeId) {
 		case 1:
 		case 2:
-			if (vehicleTypeRepository.findByVehicleTypeId(vechileTypeId).getSpaceAviable()<1) {
+			if (vehicleTypeRepository.findByVehicleTypeId(vechileTypeId).getSpaceAviable() < 1) {
 				throw new ParkingException(ERROR_MAX_CAPACITY);
 			}
 			break;
@@ -111,7 +117,7 @@ public class TicketService {
 
 		return true;
 	}
-	
+
 	/**
 	 * Access to save ticket
 	 * 
@@ -129,30 +135,27 @@ public class TicketService {
 	 */
 	public List<ParkingTicket> findAllTickets() {
 		return ticketImplementation.findAll();
-		
+
 	}
-	
-	
+
 	public boolean validateLicensePlate(String licensePlate) {
-		
+
 		return licensePlate.toUpperCase().startsWith(INITIAL_LETER_RESTRICTION);
 	}
 
 	public boolean authorizeVehicleIn(ParkingTicket ticketParking, Vehicle vehicle) {
 
-		return ((validateLicensePlate(vehicle.getLicensePlate())
-				&& validateVehicleInDate(ticketParking))||!validateLicensePlate(vehicle.getLicensePlate()));
+		return ((validateLicensePlate(vehicle.getLicensePlate()) && validateVehicleInDate(ticketParking))
+				|| !validateLicensePlate(vehicle.getLicensePlate()));
 
 	}
 
 	public boolean validateVehicleInDate(ParkingTicket parkingTicket) {
-	
+
 		Calendar calInt = Calendar.getInstance();
-		Calendar calOut = Calendar.getInstance();
 		calInt.setTime(parkingTicket.getInTimeDate());
-		calOut.setTime(parkingTicket.getInTimeDate());
-		return (Objects.equals((calInt.get(Calendar.DAY_OF_WEEK)),Calendar.SUNDAY)
-				|| Objects.equals((calInt.get(Calendar.DAY_OF_WEEK)),Calendar.MONDAY));
+		return (Objects.equals((calInt.get(Calendar.DAY_OF_WEEK)), Calendar.SUNDAY)
+				|| Objects.equals((calInt.get(Calendar.DAY_OF_WEEK)), Calendar.MONDAY));
 
 	}
 

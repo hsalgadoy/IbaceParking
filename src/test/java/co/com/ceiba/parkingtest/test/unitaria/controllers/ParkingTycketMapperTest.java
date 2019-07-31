@@ -38,7 +38,6 @@ public class ParkingTycketMapperTest {
 		assertEquals(ticket.getInTimeDate(), ticketEntity.getInTimeDate());
 		assertEquals(ticket.getOutTimeDate(), ticketEntity.getOutTimeDate());
 		assertEquals(ticket.getTicketNumber(), ticketEntity.getTicketNumber(),0.01);
-	//	assertEquals(ticket.getVehicle(), ticketEntity.getVehicle());
 		
 	}
 	
@@ -52,7 +51,6 @@ public class ParkingTycketMapperTest {
 		assertEquals(ticket.getInTimeDate(), ticketEntity.getInTimeDate());
 		assertEquals(ticket.getOutTimeDate(), ticketEntity.getOutTimeDate());
 		assertEquals(ticket.getTicketNumber(), ticketEntity.getTicketNumber(),0.01);
-	//	assertEquals(ticket.getVehicle(), ticketEntity.getVehicle());
 		
 	}
 

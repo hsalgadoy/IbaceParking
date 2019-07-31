@@ -21,10 +21,13 @@ public class ParkingTicket {
 	private Date inTimeDate;
 
 	private Date outTimeDate;
+	
+	private double displacementCost;
 
 	private double grossTotal;
 	
 	
-	
+	// agregar validacion de ingreso 
+	//lombok no es buena herramienta para estructura de datos con validaciones
 	
 }
