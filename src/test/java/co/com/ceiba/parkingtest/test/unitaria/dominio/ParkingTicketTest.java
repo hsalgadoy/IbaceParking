@@ -21,17 +21,10 @@ import co.com.ceiba.parkingtest.test.unitaria.databuilder.VehicleTypeDataBuilder
 public class ParkingTicketTest {
 
 	private static final int TICKET_NUM = 1;
-	private static final String IN_DATE = "10/06/2019 07:00:00";
-	private static final String OUT_DATE = "10/06/2019 20:00:00";
-	private static final String SUNDAY_DATE = "28/07/2019 20:00:00";
-	private static final String MONDAY_DATE = "21/07/2019 20:00:00";
-	private static final String NORMAL_DATE = "22/07/2019 20:00:00";
+
 	private static final Vehicle VEHICLE_T = new VehicleDataBuilder().build();
-	private static final VehicleType VEHICLE_TYPE = new VehicleTypeDataBuilder().build();
-	private static final VehicleType VEHICLE_TYPE_CAR = new VehicleTypeDataBuilder().withDayValue(8000)
-			.withDisplacementCost(0).withIdVehicleType(1000).withIdVehicleType(2).withParkingSpace(20).withSpaceAviable(20).build();
 	private static final double TOTAL_TICKET = 6000;
-	public final SimpleDateFormat formato = new SimpleDateFormat("dd/mm/yyyy hh:mm:ss");
+	public final SimpleDateFormat formato = new SimpleDateFormat("dd-mm-yyyy hh:mm:ss");
 	private ParkingTicket parkingTicket;
 
 	@Autowired
@@ -39,6 +32,15 @@ public class ParkingTicketTest {
 
 	@Before
 	public void setUp() throws ParseException {
+
+	}
+
+	// test for data builder ParkingTicket
+	@Test
+	public void testbuildtciket() throws ParseException {
+		String IN_DATE = "10-06-2019 07:00:00";
+		String OUT_DATE = "10-06-2019 20:00:00";
+		
 		// Arrange
 
 		ParkingTicketDataBuilder parkingTicketDataBuilder = new ParkingTicketDataBuilder().withTicketNumber(TICKET_NUM)
@@ -46,11 +48,6 @@ public class ParkingTicketTest {
 				.withGrossTotal(TOTAL_TICKET);
 		// Act
 		parkingTicket = parkingTicketDataBuilder.build();
-
-	}
-
-	@Test
-	public void test() throws ParseException {
 		// Assert
 		assertNotNull(parkingTicket);
 		assertEquals(parkingTicket.getTicketNumber(), TICKET_NUM);
@@ -63,96 +60,143 @@ public class ParkingTicketTest {
 
 	@Test
 	public void testsundayprice() throws ParseException {
+		String IN_DATE = "10-06-2019 07:00:00";
+		String SUNDAY_DATE = "28-07-2019 20:00:00";
+		
+		VehicleType type_moto = new VehicleTypeDataBuilder().build();
 
-		// coregir con valor
-		assertEquals(76000, service.calculateTotalParking(formato.parse(IN_DATE), formato.parse(SUNDAY_DATE), VEHICLE_TYPE),
-				0.01);
+		assertEquals(76000,
+				service.calculateTotalParking(formato.parse(IN_DATE), formato.parse(SUNDAY_DATE), type_moto), 0.01);
 
 	}
-	
+
 	@Test
 	public void testmondayprice() throws ParseException {
+		String IN_DATE = "10-06-2019 07:00:00";
+		String MONDAY_DATE = "21-07-2019 20:00:00";
+		
+		VehicleType type_moto = new VehicleTypeDataBuilder().build();
 
-		// coregir con valor
-		assertEquals(48000, service.calculateTotalParking(formato.parse(IN_DATE), formato.parse(MONDAY_DATE), VEHICLE_TYPE),
-				0.01);
+		assertEquals(48000,
+				service.calculateTotalParking(formato.parse(IN_DATE), formato.parse(MONDAY_DATE), type_moto), 0.01);
 
 	}
-	
+
 	@Test
 	public void testnormaprice() throws ParseException {
+		String IN_DATE = "10-06-2019 07:00:00";
+		String NORMAL_DATE = "22-07-2019 20:00:00";
+		
+		VehicleType type_moto = new VehicleTypeDataBuilder().build();
 
-		// coregir con valor
-		assertEquals(52000, service.calculateTotalParking(formato.parse(IN_DATE), formato.parse(NORMAL_DATE), VEHICLE_TYPE),
-				0.01);
+		assertEquals(52000,
+				service.calculateTotalParking(formato.parse(IN_DATE), formato.parse(NORMAL_DATE), type_moto), 0.01);
 
 	}
+
 	@Test
 	public void testService() throws ParseException {
+		String IN_DATE = "10-06-2019 07:00:00";
+		String OUT_DATE = "10-06-2019 20:00:00";
+		
+		VehicleType type_moto = new VehicleTypeDataBuilder().build();
 
-		// coregir con valor
-		assertEquals(4000, service.calculateTotalParking(formato.parse(IN_DATE), formato.parse(OUT_DATE), VEHICLE_TYPE),
-				0.01);
+		assertEquals(4000, service.calculateTotalParking(formato.parse(IN_DATE), formato.parse(OUT_DATE), type_moto),0.01);
 
 	}
-	
+
 	@Test
 	public void testsundaypricecar() throws ParseException {
-
-		// coregir con valor
-		assertEquals(152000, service.calculateTotalParking(formato.parse(IN_DATE), formato.parse(SUNDAY_DATE), VEHICLE_TYPE_CAR),
-				0.01);
+		String IN_DATE = "10-06-2019 07:00:00";
+		String SUNDAY_DATE = "28-07-2019 20:00:00";
+		
+		VehicleType type_car = new VehicleTypeDataBuilder().withDayValue(8000).withDisplacementCost(0)
+				.withIdVehicleType(1000).withIdVehicleType(2).withParkingSpace(20).withSpaceAviable(20).build();
+		
+		assertEquals(152000,
+				service.calculateTotalParking(formato.parse(IN_DATE), formato.parse(SUNDAY_DATE), type_car), 0.01);
 
 	}
-	
+
 	@Test
 	public void testmondaypricecar() throws ParseException {
-
-		// coregir con valor
-		assertEquals(96000, service.calculateTotalParking(formato.parse(IN_DATE), formato.parse(MONDAY_DATE), VEHICLE_TYPE_CAR),
+		String IN_DATE = "10-06-2019 07:00:00";
+		String MONDAY_DATE = "21-07-2019 20:00:00";
+		
+		VehicleType type_car = new VehicleTypeDataBuilder().withDayValue(8000).withDisplacementCost(0)
+				.withIdVehicleType(1000).withIdVehicleType(2).withParkingSpace(20).withSpaceAviable(20).build();
+		
+		assertEquals(96000, service.calculateTotalParking(formato.parse(IN_DATE), formato.parse(MONDAY_DATE), type_car),
 				0.01);
 
 	}
-	
+
 	@Test
 	public void testnormapricecar() throws ParseException {
-
-		// coregir con valor
-		assertEquals(104000, service.calculateTotalParking(formato.parse(IN_DATE), formato.parse(NORMAL_DATE), VEHICLE_TYPE_CAR),
-				0.01);
+		String IN_DATE = "10-06-2019 07:00:00";
+		String NORMAL_DATE = "22-07-2019 20:00:00";
+		
+		VehicleType type_car = new VehicleTypeDataBuilder().withDayValue(8000).withDisplacementCost(0)
+				.withIdVehicleType(1000).withIdVehicleType(2).withParkingSpace(20).withSpaceAviable(20).build();
+		
+		assertEquals(104000,
+				service.calculateTotalParking(formato.parse(IN_DATE), formato.parse(NORMAL_DATE), type_car), 0.01);
 
 	}
+
 	@Test
 	public void testServicecar() throws ParseException {
-
-		// coregir con valor
-		assertEquals(4000, service.calculateTotalParking(formato.parse(IN_DATE), formato.parse(OUT_DATE), VEHICLE_TYPE),
+		String IN_DATE = "10-06-2019 07:00:00";
+		String OUT_DATE = "10-06-2019 20:00:00";
+		
+		VehicleType type_moto = new VehicleTypeDataBuilder().build();
+		
+		assertEquals(4000, service.calculateTotalParking(formato.parse(IN_DATE), formato.parse(OUT_DATE), type_moto),
 				0.01);
 
 	}
-	
-	
 
+	// testForEntryRestrictionMondyaSunday
 	@Test
 	public void testSundayIn() throws ParseException {
+		String OUT_DATE = "10-06-2019 20:00:00";
+		String SUNDAY_DATE = "28-07-2019 20:00:00";
+		
 
-		// coregir que de valor
-		parkingTicket.setInTimeDate(formato.parse(SUNDAY_DATE));
+		ParkingTicketDataBuilder parkingTicketDataBuilder = new ParkingTicketDataBuilder().withTicketNumber(TICKET_NUM)
+				.withInTimeDate(formato.parse(SUNDAY_DATE)).withOutTimeDate(formato.parse(OUT_DATE))
+				.withVehicle(VEHICLE_T).withGrossTotal(TOTAL_TICKET);
+
+		parkingTicket = parkingTicketDataBuilder.build();
+
 		assertEquals(service.validateVehicleInDate(parkingTicket), true);
 	}
 
 	@Test
 	public void testMondayIn() throws ParseException {
+		String OUT_DATE = "10-06-2019 20:00:00";
+		String MONDAY_DATE = "21-07-2019 20:00:00";
+		
 
-		// coregir que de valor
-		parkingTicket.setInTimeDate(formato.parse(MONDAY_DATE));
+		ParkingTicketDataBuilder parkingTicketDataBuilder = new ParkingTicketDataBuilder().withTicketNumber(TICKET_NUM)
+				.withInTimeDate(formato.parse(MONDAY_DATE)).withOutTimeDate(formato.parse(OUT_DATE))
+				.withVehicle(VEHICLE_T).withGrossTotal(TOTAL_TICKET);
+
+		parkingTicket = parkingTicketDataBuilder.build();
+
 		assertEquals(service.validateVehicleInDate(parkingTicket), true);
 	}
 
 	public void testNormaDayIn() throws ParseException {
+		String OUT_DATE = "10-06-2019 20:00:00";
+		String NORMAL_DATE = "22-07-2019 20:00:00";
+		
+		ParkingTicketDataBuilder parkingTicketDataBuilder = new ParkingTicketDataBuilder().withTicketNumber(TICKET_NUM)
+				.withInTimeDate(formato.parse(NORMAL_DATE)).withOutTimeDate(formato.parse(OUT_DATE))
+				.withVehicle(VEHICLE_T).withGrossTotal(TOTAL_TICKET);
 
-		// coregir que de valor
-		parkingTicket.setInTimeDate(formato.parse(NORMAL_DATE));
+		parkingTicket = parkingTicketDataBuilder.build();
+
 		assertEquals(service.validateVehicleInDate(parkingTicket), false);
 	}
 

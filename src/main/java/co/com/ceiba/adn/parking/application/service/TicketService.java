@@ -29,6 +29,8 @@ public class TicketService {
 	private static final String ERROR_MAX_CAPACITY = "Acceso denegado: El estacionamiento esta en su maxima capacidad";
 	private static final String ERROR_VEHICLE_TYPE = "Tipo de Vehiculo Incompatible";
 	private static final String INITIAL_LETER_RESTRICTION = "A";
+	private static final int HOUS_OF_DAY=24;
+	private static final int ITO_HOUS=9;
 
 	@Autowired
 	private TicketImplementation ticketImplementation;
@@ -88,15 +90,15 @@ public class TicketService {
 		
 		long serviceTime = TimeUnit.MILLISECONDS.toHours((outDateTime.getTime() - inDateTime.getTime()));
 
-		while (serviceTime >= 24) {
+		while (serviceTime >= HOUS_OF_DAY) {
 			cost += type.getDayValue();
-			serviceTime -= 24;
+			serviceTime -= HOUS_OF_DAY;
 
 		}
 		if (serviceTime < 1) {
 			cost += type.getHourValue();
 		} else {
-			cost += (serviceTime >= 9 ? type.getDayValue() : type.getHourValue() * serviceTime);
+			cost += (serviceTime >= ITO_HOUS ? type.getDayValue() : type.getHourValue() * serviceTime);
 					
 		}
 		return cost;
