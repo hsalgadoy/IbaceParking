@@ -6,42 +6,36 @@ package co.com.ceiba.adn.parking.domain.model;
  *
  */
 
-
 public class Vehicle {
 
-	private String licensePlate;
+	private String licenseplate;
 
-	private double displacement;
+	private double displacemen;
 
-	private int vehicleType;
+	private int vehicletype;
 
 	public String getLicensePlate() {
-		return licensePlate;
+		return licenseplate;
 	}
 
 	public double getDisplacement() {
-		return displacement;
+		return displacemen;
 	}
 
 	public int getVehicleType() {
-		return vehicleType;
+		return vehicletype;
 	}
 
 	public void setLicensePlate(String licensePlate) {
-		this.licensePlate = licensePlate;
+		this.licenseplate = licensePlate;
 	}
 
 	public void setDisplacement(double displacement) {
-		this.displacement = displacement;
+		this.displacemen = displacement;
 	}
 
 	public void setVehicleType(int vehicleType) {
-		this.vehicleType = vehicleType;
+		this.vehicletype = vehicleType;
 	}
-				
-	
-	
-	
-	
 }
  

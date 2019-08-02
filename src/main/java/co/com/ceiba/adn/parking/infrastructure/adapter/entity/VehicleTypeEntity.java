@@ -11,6 +11,30 @@ import javax.persistence.Id;
  */
 @Entity
 public class VehicleTypeEntity {
+	
+	@Id
+	@Column(name = "ID_VEHICLE_TYPE")
+	private int idVehicleType;
+	
+	@Column(name="TYPE_DESCRIPTION")
+	private String description;
+	
+	@Column(name = "HOUR_VALUE")
+	private double hourValue;
+
+	@Column(name = "DAY_VALUE")
+	private double dayValue;
+
+	@Column(name = "PARKING_SPACE")
+	private int parkingSpace;
+
+	@Column(name = "SPACE_AVIABLE")
+	private int spaceAviable;
+
+	@Column(name = "EXTRA_COST")
+	private double displacementCost;
+	
+	
 	public int getIdVehicleType() {
 		return idVehicleType;
 	}
@@ -67,27 +91,6 @@ public class VehicleTypeEntity {
 		this.displacementCost = displacementCost;
 	}
 
-	@Id
-	@Column(name = "ID_VEHICLE_TYPE")
-	private int idVehicleType;
-	
-	@Column(name="TYPE_DESCRIPTION")
-	private String description;
-	
-	@Column(name = "HOUR_VALUE")
-	private double hourValue;
 
-	@Column(name = "DAY_VALUE")
-	private double dayValue;
-
-	@Column(name = "PARKING_SPACE")
-	private int parkingSpace;
-
-	@Column(name = "SPACE_AVIABLE")
-	private int spaceAviable;
-
-	@Column(name = "EXTRA_COST")
-	private double displacementCost;
-	
 
 }

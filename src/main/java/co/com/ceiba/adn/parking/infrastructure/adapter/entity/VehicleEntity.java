@@ -17,6 +17,9 @@ public class VehicleEntity {
 	@Column(name="DISPLACEMENT")
 	private  double displacement;
 	
+	@Column(name="VEHICLE_TYPE_ID")
+	private int vehicleType;
+	
 	public String getLicensePlate() {
 		return licensePlate;
 	}
@@ -41,8 +44,7 @@ public class VehicleEntity {
 		this.vehicleType = vehicleType;
 	}
 
-	@Column(name="VEHICLE_TYPE_ID")
-	private int vehicleType;
+
 	
 	
 }
