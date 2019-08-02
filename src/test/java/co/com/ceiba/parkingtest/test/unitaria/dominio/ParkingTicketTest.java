@@ -186,7 +186,7 @@ public class ParkingTicketTest {
 
 		assertEquals(service.validateVehicleInDate(parkingTicket), true);
 	}
-
+	@Test
 	public void testNormaDayIn() throws ParseException {
 		String OUT_DATE = "10-06-2019 20:00:00";
 		String NORMAL_DATE = "22-07-2019 20:00:00";
