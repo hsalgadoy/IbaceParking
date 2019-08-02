@@ -4,18 +4,69 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  * 
  * @author hsneider.salgado
  *
  */
 @Entity
-@Getter
-@Setter
 public class VehicleTypeEntity {
+	public int getIdVehicleType() {
+		return idVehicleType;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public double getHourValue() {
+		return hourValue;
+	}
+
+	public double getDayValue() {
+		return dayValue;
+	}
+
+	public int getParkingSpace() {
+		return parkingSpace;
+	}
+
+	public int getSpaceAviable() {
+		return spaceAviable;
+	}
+
+	public double getDisplacementCost() {
+		return displacementCost;
+	}
+
+	public void setIdVehicleType(int idVehicleType) {
+		this.idVehicleType = idVehicleType;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setHourValue(double hourValue) {
+		this.hourValue = hourValue;
+	}
+
+	public void setDayValue(double dayValue) {
+		this.dayValue = dayValue;
+	}
+
+	public void setParkingSpace(int parkingSpace) {
+		this.parkingSpace = parkingSpace;
+	}
+
+	public void setSpaceAviable(int spaceAviable) {
+		this.spaceAviable = spaceAviable;
+	}
+
+	public void setDisplacementCost(double displacementCost) {
+		this.displacementCost = displacementCost;
+	}
+
 	@Id
 	@Column(name = "ID_VEHICLE_TYPE")
 	private int idVehicleType;
